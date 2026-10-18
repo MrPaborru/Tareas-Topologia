@@ -1,0 +1,381 @@
+%-------------------- Topología de conjuntos --------------------
+
+\section{Topología de conjuntos}
+
+% Ejercicio 1
+\begin{ejer}
+Dado $A\subseteq X$, probar que
+\(
+    X=\inter(A)\sqcup\partial A\sqcup\inter(X\setminus A)
+\)
+\end{ejer}
+\begin{sol}[Demostración]
+Primero probaremos que $X = \inter(A) \cup \partial A \cup \inter(X \setminus A)$. Si $x \en X$ cumple que $x \notin \inter(A)$ y $x \notin \partial A$, debemos demostrar que $x \en \inter(X \setminus A)$: por no estar en $\inter(A)$, todo entorno de $x$ interseca a $X \setminus A$; además, por no estar en la frontera $\partial A$, existe algún entorno $U$ de $x$ que no interseca a $A$ o no interseca a $X \setminus A$. Dado que ya descartamos la segunda opción, necesariamente $U$ no interseca a $A$, lo que implica que $U \subseteq X \setminus A$. Esto prueba, por definición, que $x \en \inter(X \setminus A)$.
+A continuación, probaremos que los tres conjuntos son disjuntos a pares.
+\begin{itemize}
+    \item $\inter(A) \cap \inter(X \setminus A) = \varnothing$, ya que $\inter(A) \subseteq A$ y $\inter(X \setminus A) \subseteq X \setminus A$.
+    \item $\inter(A) \cap \partial A = \varnothing$: si $x \en \inter(A)$, existe un entorno $U$ de $x$ tal que $U \subseteq A$. Este entorno no interseca a $X \setminus A$, por lo que $x$ no puede pertenecer a $\partial A$.
+    \item $\inter(X \setminus A) \cap \partial A = \varnothing$: es análogo a lo anterior notando que $\partial A = \partial(X \setminus A)$.
+\end{itemize}
+Hemos probado que $X$ es unión disjunta de estos tres conjuntos.
+\end{sol}
+
+% Ejercicio 2
+\begin{ejer}
+Si $\mathcal{B}$ es base de un espacio topológico $X$, entonces $\mathcal{B}$ satisface las siguientes propiedades.
+\begin{enumerate}[label = (\alph*)]
+    \item Cada punto $x\in X$ pertenece a un conjunto $V\in\mathcal{B}$.
+    \item Sean $V_{1},V_{2}\in\mathcal{B}$ y $x\in V_{1}\cap V_{2}$. Entonces existe $V_{3}\in\mathcal{B}$ tal que $x\in V_{3}\subseteq V_{1}\cap V_{2}$.
+\end{enumerate}
+Recíprocamente, si $\mathcal{B}\subseteq\mathcal{P}(X)$ satisface (a) y (b), entonces $\mathcal{B}$ base de una topología en $X$.
+\end{ejer}
+\begin{sol}[Demostración]
+Como $X$ es abierto y $\mathcal{B}$ es base, $X$ es unión de elementos de $\mathcal{B}$, lo que prueba (a). Además, como los elementos de $\mathcal{B}$ son abiertos, se tiene que $V_1 \cap V_2$ es abierto, por lo que $V_1 \cap V_2 = \bigcup \mathcal{B'}$ para algún $\mathcal{B'} \subseteq \mathcal{B}$. De esto se sigue que para cada $x \en V_1 \cap V_2$ existe un $V_3 \en \mathcal{B'} \subseteq \mathcal{B}$ tal que $x \en V_3 \subseteq V_1 \cap V_2$, lo cual prueba (b).\par
+Recíprocamente, supongamos que $\mathcal{B} \subseteq \mathcal{P}(X)$ satisface (a) y (b). Entonces definimos
+\[\textstyle
+    \mathcal{T}%
+    \coloneq \set[\big]{%
+        U \en \mathcal{P}(X)%
+        \given%
+        \exists \mathcal{B'} \subseteq \mathcal{B},\; U = \bigcup \mathcal{B'}
+    }
+\]
+Es sencillo verificar que $\mathcal{T}$ es una topología para $X$:
+\begin{itemize}
+\item $\varnothing = {\bigcup \varnothing} \en \mathcal{T}$, y por inciso (a), $X = {\bigcup \mathcal{B}} \en \mathcal{T}$.
+
+\item Si $U_1, U_2 \en \mathcal{T}$, existen $\mathcal{B}_1, \mathcal{B}_2 \subseteq \mathcal{B}$ tales que $U_1 = \bigcup\mathcal{B}_1$ y $U_2 = \bigcup\mathcal{B}_2$. Luego, gracias a (b)
+\[
+    \mathcal{B}_3%
+    \coloneq \set[\big]{%
+        V \en \mathcal{B} \given \exists V_1 \en \mathcal{B}_1, \exists V_2 \en \mathcal{B}_2,\; V \subseteq V_1 \cap V_2
+    }%
+    \subseteq \mathcal{B}
+\]
+cumple que $U_1 \cap U_2 = \bigcup \mathcal{B}_3$: esto es evidente, si $x \en U_1 \cap U_2$ entonces existen $V_1 \en \mathcal{B}_1$ y $V_2 \en \mathcal{B}_2$ que tienen a $x$ como elemento, por lo que (b) implica que existe $V \subseteq V_1 \cap V_2$ con $x \en V$; luego, $x \en V \en \mathcal{B}_3$ así que $x \en \bigcup \mathcal{B}_3$. Esto prueba la contención "$\subseteq$", La otra contención es inmediata de que $V_1 \subseteq U_1$ y $V_2 \subseteq U_2$ siempre que $V_1 \en \mathcal{B}_1$ y $V_2 \en \mathcal{B}_2$ por lo que $V \subseteq V_1 \cap V_2 \subseteq U_1 \cap U_2$ para cada $V \en \mathcal{B}_3$.
+
+\item Si $\set{U_\alpha}_{\alpha \en I}$ es una familia de elementos de $\mathcal{T}$ cuya unión es $U$, entonces para cada $\alpha \en I$ existe un $\mathcal{B}_\alpha \subseteq \mathcal{B}$ tal que $U_\alpha = \bigcup \mathcal{B}_\alpha$. Luego, la siguiente colección\footnote{Nótese el uso implícito (pero evitable) del axioma de elección para construir la familia $\mathcal{B}_\alpha$.}
+\[
+    \mathcal{B}'%
+    = \bigcup \set{\mathcal{B}_\alpha}_{\alpha \en I}%
+    \subseteq \mathcal{B}
+\]
+satisface que $U = \bigcup \mathcal{B}'$: si $x \en U$ entonces existe $\alpha \en I$ tal que $x \en U_\alpha$, por lo que $x \en \bigcup \mathcal{B}_\alpha$; sin embargo, $\mathcal{B}_\alpha \subseteq \mathcal{B}'$ por lo que $\bigcup \mathcal{B}_\alpha \subseteq \bigcup \mathcal{B}'$ de donde $x \en \bigcup\mathcal{B}'$. Esto prueba la contención "$\subseteq$", para la otra contención basta con notar que cada $V \en \mathcal{B}'$ es elemento de algún $\mathcal{B}_\alpha$ así que $V \subseteq U_\alpha \subseteq U$ de donde se sigue que $\bigcup \mathcal{B}' \subseteq U$.
+\end{itemize}
+Hemos probado que $\mathcal{T}$ es topología para $X$; más aún, por su definición, $\mathcal{B}$ es una base suya.
+\end{sol}
+
+% Ejercicio 3
+\begin{ejer}
+Si $A\subseteq X$ es conexo, entonces $\ubar{A}$ es conexo.
+\end{ejer}
+\begin{sol}[Demostración]
+Supongamos por contradicción que $(U,V)$ es una separación de $\ubar{A}$ y sean $U', V'$ abiertos de $X$ tales que $U = U' \cap \ubar{A}$ y $V = V' \cap \ubar{A}$. Como $A$ es conexo, tiene que estar contenido en $U$ o $V$ (de no ser así, $(U \cap A,V \cap A)$ sería separación de $A$), supongamos sin perder generalidad que $A \subseteq U$. Ahora bien, como $V \neq \varnothing$, existe $x \en V' \cap \ubar{A}$; sin embargo,
+\[
+    V' \cap A \subseteq V' \cap U%
+    = V' \cap U' \cap \ubar{A}%
+    = U \cap V%
+    = \varnothing
+\]
+lo cual es absurdo, pues $x \en \ubar{A}$ y $V'$ es un entorno de $x$ que no interseca a $A$. El error estuvo en suponer que existe una separación de $\ubar{A}$, por lo cual no puede existir y $\ubar{A}$ es conexo.\qedhere\par
+\vspace{1em}
+\emph{Ahora daré otra prueba que me gusta más, pero que usa otra definición de conexidad:}\\
+Decimos que $A$ es conexo cuando todo mapeo $A \to 2$ es constante, donde $2 \coloneq \set{0,1}$ es discreto. Probemos que $\ubar{A}$ es conexo: dado un mapeo $f \colon \ubar{A} \to 2$ arbitrario, la función $f|_{A} \colon A \to 2$ es también continua ($f|_A = f \circ i_A$ es composición de mapeos) así que $f|_A$ es constante, supongamos sin perder generalidad $f(A) = 0$. Sin embargo, $f^{-1}(\set{0})$ es cerrado (pues $f$ es continua y $\set0$ cerrado) y ya vimos que $A \subseteq f^{-1}(\set0)$, por lo tanto $\ubar{A} \subseteq f^{-1}(\set0)$ lo cual prueba que $f$ es constante de valor $0$. Como el mapeo $f\colon \ubar{A} \to 2$ es arbitrario, se sigue que $\ubar{A}$ es conexo.\qed
+\end{sol}\clearpage
+
+% Ejercicio 4
+\begin{ejer}
+Si $A\subseteq X$ es denso, entonces $\ubar{U\cap A}=\ubar{U}$ para cualquier abierto $U\subseteq X$.
+\end{ejer}
+\begin{sol}[Demostración]
+Como $U \cap A \subseteq U$, entonces $\ubar{U \cap A} \subseteq \ubar{U}$. Para la otra contención sea $x \en \ubar{U}$ y sea $V$ entorno abierto arbitrario de $x$: por definición, $V$ interseca a $U$; luego, $U \cap V \neq \varnothing$ es abierto, por lo que interseca a $A$ (pues $A$ es denso por hipótesis), i.e., $(U \cap A) \cap V \neq \varnothing$. Como $V$ es arbitrario, se sigue que $x \en \ubar{U \cap A}$. Hemos probado la otra contención.
+\end{sol}
+
+% Ejercicio 5
+\begin{ejer}
+Decimos que $X$ es totalmente disconexo si sus componentes conexas son sus puntos.
+\begin{enumerate}
+    \item[a)] Demostrar que $\mathbb{Q}\subseteq\mathbb{R}$ es totalmente disconexo, pero no discreto.
+    \item[b)] Demostrar que $\mathbb{Z}$ es totalmente disconexo y discreto.
+    \item[c)] Demostrar que el conjunto de Cantor es totalmente disconexo, no es discreto y es cerrado.
+\end{enumerate}
+\end{ejer}
+\begin{sol}[Demostración]
+Primero probemos que todo subespacio conexo de $\mathbb{R}$ es un intervalo\footnote{Un intervalo se define como un $I \subseteq \mathbb{R}$ tal que para cada $a,b \en I$ y $c \en \mathbb{R}$, si $a\leq c \leq b$ entonces $c \en I$.}. 
+Sea $I$ un subconjunto conexo de $\mathbb{R}$ y sean $a,b \en I$ y $c \en \mathbb{R}$. 
+Si $a \leq c \leq b$ pero $c \notin I$, entonces $a < c < b$ y los conjuntos
+\[
+   U \coloneq (-\infty, c) \cap I,
+   \qquad 
+   V \coloneq (c, +\infty) \cap I
+\]
+forman una separación de $I$. En efecto, $U$ y $V$ son abiertos en $I$, son disjuntos y como $c \notin I$ entonces $(-\infty, c) \cup (c, +\infty) \supseteq I$, por lo que satisfacen $U \cup V = I$. Esto contradice la hipótesis de que $I$ es conexo. Por lo tanto, debe cumplirse que $c \en I$. Esto prueba que $I$ tiene que ser un intervalo. Más aún, es un resultado conocido que todo intervalo es conexo. Ahora probemos cada inciso.
+%Recíprocamente, sea $I \subseteq \mathbb{R}$ un intervalo y supongamos sin perder generalidad que es disconexo. Sea $(U,V)$ una separación de $I$, entonces existen $a \en U$ y $b \en V$ ---podemos suponer $a < b$--- definimos ahora
+% \[
+%     c \coloneq \sup {[a, b] \cap U}
+% \]
+% Por un lado, $c \notin U$ ya que, en caso contrario, existe $\epsilon>0$ tal que $(c - \epsilon, c +\epsilon) \subseteq U$ de donde $$
+    \begin{enumerate}[label = (\alph*)]
+    \item Acabamos de ver que los subespacios conexos de $\mathbb{R}$ son intervalos, pero la densidad de $\mathbb{R}\setminus\mathbb{Q}$ implica que en todo intervalo no degenerado hay un irracional así que no puede estar contenido en $\mathbb{Q}$. Por lo tanto, los únicos intervalos contenidos en $\mathbb{Q}$ son puntos, i.e., los únicos subespacios conexos de $\mathbb{Q}$ son puntos, así que este es totalmente disconexo.\footnote{Observe que si $A \subseteq X \subseteq Y$, la topología de $A$ como subespacio de $X$ (considerado a su vez como subespacio de $Y$) coincide con la topología de $A$ como subespacio de $Y$.}
+    % Veamos que si $A \subseteq \mathbb{Q}$ tiene al menos dos elementos, entonces es disconexo. En efecto, supongamos $a,b \en A$ con $a < b$; luego, la densidad de $\mathbb{R}\setminus\mathbb{Q}$ implica que existe $x \en \mathbb{R} \setminus \mathbb{Q}$ con $a < x < b$, por lo que los intervalos
+    % \[
+    %     I_1 \coloneq ({-\infty, x}) \cap A%
+    %     \quad\text{y}\quad%
+    %     I_2 \coloneq (x, +\infty) \cap A
+    % \]
+    % cumplen que $I_1 \cup I_2 = A$ (pues $({-\infty, x}) \cup (x, +\infty) \supseteq A$ gracias a que $x \notin \mathbb{Q}$ y $A \subseteq \mathbb{Q}$), que $I_1 \cap I_2 = \varnothing$, y que $a \en I_1$ y $b \en I_2$. Esto prueba que $(I_1, I_2)$ es separación de $A$, i.e., $A$ es disconexo. Como cualquier $A \subseteq \mathbb{Q}$ de al menos dos elementos es disconexo, las componentes conexas de $\mathbb{Q}$ son sus puntos. 
+    % Ya probamos que $\mathbb{Q}$ es totalmente disconexo.
+    Por otro lado, es evidente que $\mathbb{Q}$ no es discreto, pues los abiertos no vacíos de $\mathbb{Q}$ contienen un intervalo racional $(a, b) \cap \mathbb{Q}$ con $a < b$, el cual ---por densidad de $\mathbb{Q}$--- tiene infinitos elementos. Se sigue que los puntos no pueden ser abiertos ya que no pueden contener un subconjunto infinito. Esto prueba que $\mathbb{Q}$ no es discreto.
+
+    \item $\mathbb{Z} \subseteq \mathbb{Q}$ es discreto, ya que para cada $z \en \mathbb{Z}$ se tiene que $\set{z} = (z - \nicefrac12, z + \nicefrac12) \cap \mathbb{Z}$ es abierto. Por otro lado, todo espacio discreto es totalmente disconexo ya que cualquier subconjunto $A$ con al menos dos elementos se descompone como $A = \set{a} \sqcup A\setminus\set{a}$ donde $\set{a}$ y $A\setminus\set{a}$ son abiertos no vacíos.\footnote{En un espacio discreto todos los subconjuntos son abiertos, por lo que sus subespacios también son discretos.} Por tanto, las componentes conexas son los puntos.
+
+    \item El \emph{conjunto de Cantor} $\mathcal{C}$ se define recursivamente: sea $\mathcal{C}_0 = [0,1]$ y para $n \geq 1$, definimos
+    \[
+        \mathcal{C}_n = \frac{1}{3}\mathcal{C}_{n-1} \cup \left( \frac{2}{3} + \frac{1}{3}\mathcal{C}_{n-1} \right)
+    \]
+    El conjunto de Cantor es la intersección de todos estos conjuntos:
+    \(
+    \mathcal{C} = \bigcap_{n=0}^{\infty} \mathcal{C}_n.
+    \)\par\vspace{1em}
+    \emph{El conjunto de Cantor es cerrado:}\\
+    Las aplicaciones $x \mapsto \tfrac{1}{3}x$ y $x \mapsto \tfrac{2}{3} + \tfrac{1}{3}x$ son homeomorfismos de $\mathbb{R}$ en sí mismo. Luego, si $\mathcal{C}_n$ es compacto, entonces también lo es $\mathcal{C}_{n+1}$, pues $\mathcal{C}_{n+1}$ es la unión de dos imágenes continuas de compactos; como también $\mathcal{C}_{0} = [0,1]$ es compacto, por inducción se concluye que cada $\mathcal{C}_{n}$ es compacto, y por tanto, cerrado (dado que $\mathbb{R}$ es $T_2$). Finalmente, $\mathcal{C}$ es cerrado al ser intersección de cerrados; más aún, resulta compacto por estar contenido en un compacto, ya que la compacidad es débilmente hereditaria.\vspace{1em}
+
+    \emph{El conjunto de Cantor no es discreto:}\\
+    Primero veamos que $\mathcal{C}$ es infinito. En efecto, todo número de la forma 
+    \[
+        s = \sum_{n=1}^\infty a_n 3^{-n}, 
+        \qquad a_n \en \{0,2\},
+    \]
+    pertenece a él (de hecho, se puede demostrar que todos los elementos de $\mathcal{C}$ son de esta forma).  
+    Es inmediato que dichos números están en $\mathcal{C}_0$, ya que
+    $
+        0 \leq \sum_{n=1}^\infty a_n 3^{-n} 
+          \leq \sum_{n=1}^\infty 2 \cdot 3^{-n} 
+          = 1.
+    $
+    Supongamos ahora que todos los números de esta forma pertenecen a $\mathcal{C}_n$, y consideremos
+    $
+        s \coloneq \sum_{n=1}^\infty a_n 3^{-n}$ con $
+        a_n \en \{0,2\}.
+    $
+    Existen dos posibilidades:
+    \begin{itemize}
+        \item Si $a_1 = 0$, entonces
+        $
+            3s = \sum_{n=1}^\infty a_n 3^{-n+1} 
+                = \sum_{n=0}^\infty a_{n+1} 3^{-n}.
+        $
+        Sustituyendo $a_1=0$ se obtiene
+        $
+            3s = \sum_{n=1}^\infty a_{n+1} 3^{-n},
+        $
+        el cual por hipótesis, pertenece a $\mathcal{C}_n$. Así,
+        $
+            s \en \tfrac{1}{3}\mathcal{C}_n \subseteq \mathcal{C}_{n+1}.
+        $
+    
+        \item Si $a_1 = 2$, es análogo:
+        $
+            3s = \sum_{n=1}^\infty a_n 3^{-n+1} 
+                = \sum_{n=0}^\infty a_{n+1} 3^{-n},
+        $
+        y sustituyendo $a_1=2$ se tiene
+        $
+            3s = 2 + \sum_{n=1}^\infty a_{n+1} 3^{-n},
+        $
+        donde $\sum_{n=1}^\infty a_{n+1} 3^{-n} \en \mathcal{C}_n$ por hipótesis. Así,
+        $
+            s \en \tfrac{2}{3} + \tfrac{1}{3}\mathcal{C}_n \subseteq \mathcal{C}_{n+1}.
+        $
+    \end{itemize}
+    En ambos casos concluimos que $s \en \mathcal{C}_{n+1}$. Por inducción matemática, todo número de la forma anterior pertenece a cada $\mathcal{C}_n$, y por lo tanto a $\mathcal{C}$. En particular, tenemos que el conjunto de Cantor es infinito; no obstante, también es compacto, de lo cual se sigue que no puede ser discreto, ya que ningún espacio discreto infinito es compacto (tómese la cubierta con cada singleton, que no tiene sub-cubiertas propias).\vspace{1em}
+
+    \emph{El conjunto de Cantor es totalmente disconexo:}\\
+    Para demostrarlo, probaremos que no existen intervalos no degenerados contenidos en $\mathcal{C}$. Es una aplicación directa de la inducción matemática probar que cada $\mathcal{C}_n$ es la unión disjunta de $2^n$ intervalos de longitud $3^{-n}$: si $\mathcal{C}_n$ cumple esta propiedad, entonces $\frac{1}{3}\mathcal{C}_n$ y $\frac{2}{3} + \frac{1}{3}\mathcal{C}_n$ son uniones ajenas de $2^n$ intervalos de longitud $3^{-n-1}$, por lo que $\mathcal{C}_{n+1}$ es la unión de $2^{n+1}$ intervalos de longitud $3^{-(n+1)}$. Ahora, para cualquier intervalo no degenerado $I$ de longitud $r \en (0, \infty]$, existe un $n \en \mathbb{N}$ tal que $3^{-n} < r$. Debido a esto, el intervalo $I$ no puede estar contenido en ninguno de los sub-intervalos que componen $\mathcal{C}_n$ y, por tanto, tampoco en $\mathcal{C} \subseteq \mathcal{C}_n$. Esto prueba que los únicos subconjuntos conexos de $\mathcal{C}$ son los puntos; es decir, dicho conjunto es totalmente disconexo.\qedhere
+    \end{enumerate}
+\end{sol}
+
+% Ejercicio 6
+\begin{ejer}
+Sea $M$ una variedad topológica conexa de dimensión mayor que uno y $K\subseteq M$ un subconjunto finito. Demuestre que $M-K$ es conexo.
+\end{ejer}
+\begin{sol}[Demostración]
+Procederemos por inducción sobre el número de puntos de $K$.\par\vspace{1em}
+\emph{Caso base: $K = \{p\}$ con $p \en M$.}\\ 
+Supongamos por contradicción que $M - \{p\}$ no es conexo. Entonces existen conjuntos $A$ y $B$ no vacíos, abiertos y disjuntos en el subespacio $M - \{p\}$ tales que
+\[
+M - \{p\} = A \cup B.
+\]
+Dado que $M$ es una variedad de dimensión $n > 1$, existe una carta $(U, \varphi)$ alrededor de $p$ con $\varphi(U)$ una bola abierta en $\mathbb{R}^n$. Entonces $U - \{p\}$ es homeomorfo a una bola punteada en $\mathbb{R}^n$, que es conexa (incluso conexa por caminos). Por lo tanto, $U - \{p\}$ es conexo.
+
+Ahora, como $U - \{p\} \subseteq M - \{p\} = A \cup B$ y $U - \{p\}$ es conexo, se sigue que $U - \{p\}$ está contenido completamente en $A$ o completamente en $B$. Sin pérdida de generalidad, supongamos que $U - \{p\} \subseteq A$.
+
+Afirmamos que entonces $A \cup \{p\}$ y $B$ son abiertos en $M$. En efecto:
+\begin{itemize}
+    \item $B$ es abierto en $M - \{p\}$. Como $M - \{p\}$ es abierto en $M$ (pues $\{p\}$ es cerrado en $M$, ya que $M$ es Hausdorff), se sigue que $B$ es abierto en $M$.
+    \item Para ver que $A \cup \{p\}$ es abierto en $M$, note que $A$ es abierto en $M - \{p\}$, luego existe un abierto $V$ en $M$ tal que $A = V \cap (M - \{p\})$. Entonces $A \cup \{p\} = V \cup \{p\}$. Ahora, como $U - \{p\} \subseteq A$, tenemos que $U \subseteq A \cup \{p\} = V \cup \{p\}$. Dado que $U$ es un entorno abierto de $p$, para cualquier punto $x \en A \cup \{p\}$:
+    \begin{itemize}
+        \item Si $x \en A$, entonces $x \en V$ y $V$ es abierto.
+        \item Si $x = p$, entonces $U$ es un entorno abierto de $p$ contenido en $A \cup \{p\}$.
+    \end{itemize}
+    Por lo tanto, $A \cup \{p\}$ es abierto.
+\end{itemize}
+Así, $A \cup \{p\}$ y $B$ son abiertos no vacíos disjuntos en $M$ cuya unión es $M$, lo que contradice la conexidad de $M$. 
+Por tanto, $M - \{p\}$ debe ser conexo.\par\vspace{1em}
+
+\emph{Paso inductivo}:\\
+Supongamos que el resultado es cierto para cualquier conjunto finito de cardinalidad $k-1$ (con $k \geq 2$). Sea $K = \{p_1, \dots, p_k\}$ un subconjunto finito de $M$ con $k$ puntos. Consideremos $M' = M - \{p_1, \dots, p_{k-1}\}$. Por hipótesis inductiva, $M'$ es conexo. Además, $M'$ es una variedad topológica de dimensión $n > 1$ (pues es un abierto de $M$, ya que los puntos son cerrados en $M$). Aplicando el caso base a $M'$ y al punto $p_k$, obtenemos que $M' - \{p_k\} = M - K$ es conexo.
+
+Esto completa la inducción y prueba que $M - K$ es conexo para todo $K$ finito.
+\end{sol}\clearpage
+
+% Ejercicio 7
+\begin{ejer}
+Decimos que $X$ es Noetheriano si cada familia no vacía de conjuntos abiertos tiene un elemento maximal. Pruebe que cualquier conjunto con la topología cofinita es Noetheriano.
+\end{ejer}
+\begin{sol}[Demostración]
+Sea $(X, \mathcal{T}_\text{cof})$ espacio con la topología cofinita y $\mathcal{F}\subseteq\mathcal{T}_\text{cof}$ familia no vacía de abiertos. Si $\mathcal{F} = \set{\varnothing}$, el máximo es $\varnothing$, así que supongamos que $\mathcal{F}$ tiene elementos distintos del vacío. Luego, consideramos
+\[
+    n \coloneq \min\set[\big]{\card(X-U) \given U \en \mathcal{F}-\set\varnothing}
+\]
+$n$ está bien definido gracias a que los conjuntos $X - U$ con $U \en \mathcal{F}-\set\varnothing$ son finitos así que el conjunto de arriba es un subconjunto no vacío de $\mathbb{N}$. Ahora bien, por definición, existe $U \en \mathcal{F}-\set\varnothing$ tal que $n = \card(X - U)$. Probemos que $U$ es maximal: si existiera $V \en \mathcal{F}$ con $U \subsetneq V$, tendríamos que $V \neq \varnothing$ y $X - V \subsetneq X - U$; como estos conjuntos son finitos, se sigue $\card(X - V) < \card(X - U) = n$, lo cual contradice la minimalidad de $n$. Por tanto, $U$ es minimal en $\mathcal{F}$. 
+\end{sol}
+
+%-------------------- Un poco de combinatoria --------------------
+
+\section{Un poco de combinatoria}
+
+% Ejercicio 8
+\begin{ejer}
+Si $X$ es métrico y finito, entonces es discreto.
+\end{ejer}
+\begin{sol}
+Sea $(X,d)$ un espacio métrico con $X$ finito. Si $\card(X) < 2$, el resultado es inmediato. Si $\card(X) \ge 2$, el conjunto de distancias $\{ d(x,y) \mid x,y \en X, x \neq y \}$ es finito y contiene solo números positivos, por lo que debe tener un mínimo $r > 0$.
+Sea $r \coloneq \min\{ d(x,y) \mid x \neq y \}$. Para cualquier punto $x \en X$, la bola abierta $B(x,r) = \{y \en X \mid d(x,y) < r\}$ contiene únicamente al punto $x$, pues por definición de $r$, para cualquier $y \neq x$ se tiene que $d(x,y) \ge r$.
+Así, $B(x,r) = \{x\}$, lo que demuestra que todos los conjuntos unitarios son abiertos. En consecuencia, cualquier subconjunto de $X$, al ser una unión de conjuntos unitarios, es también abierto, i.e., $X$ es discreto.
+\end{sol}
+
+% Ejercicio 9
+\begin{ejer}
+Definimos la relación binaria ${\prec}\subseteq X^{2}$, donde $x\prec y$ si $x\en\ubar{\{y\}}$.
+\begin{enumerate}[label = (\alph*)]
+    \item Probar que $\prec$ es reflexiva y transitiva.
+    \item ¿Es antisimétrica?
+    \item Describir $\prec$ si $X$ es de Hausdorff.
+\end{enumerate}
+\end{ejer}
+\begin{sol}[Demostración]
+\hphantom{e}
+\begin{enumerate}[label = (\alph*)]
+    \item Es inmediato que $x \en \ubar{\set{x}}$ para cada $x \en X$, por lo que $\prec$ es reflexiva. Además, si $x, y, z \en X$ son tales que $x \en \ubar{\set{y}}$ y $y \en \ubar{\set{z}}$, entonces $\set{y} \subseteq \ubar{\set{z}}$ de donde $\ubar{\set{y}} \subseteq \ubar{\set{z}}$. De esto se sigue que $x \en \ubar{\set{z}}$. Hemos probado que $x\prec y$ y $y \prec z$ implican $x \prec z$, es decir, $\prec$ es transitiva.
+
+    \item En general no: si $X = \set{0,1}$ tiene la topología indiscreta, el único entorno de $0$ y de $1$ es $X$, por lo que $0 \en \ubar{\set{1}}$ y $1 \en \ubar{\set{0}}$; es decir, $0 \prec 1$ y $1 \prec 0$ mientras que $0 \neq 1$.
+
+    \item Cuando $X$ es $T_2$, los singleton son cerrados, por lo que $\ubar{\set{x}} = \set{x}$ para cada $x \en X$. Se sigue que el único $y \en X$ que cumple $y \prec x$ es tal que $y = x$, así que el preorden $\prec$ es trivial.\qedhere
+\end{enumerate}
+\end{sol}\clearpage
+
+%-------------------- Graficas --------------------
+
+\section{Gráficas}
+
+% Ejercicio 10
+\begin{ejer}
+Supongamos que $G$ es finita, conexa y que cada vértice tiene grado par. Pruebe que toda gráfica obtenida al eliminar una arista de $G$ sigue siendo conexa.
+\end{ejer}
+\begin{sol}[Demostración]
+Procedamos por contradicción, suponiendo que existe una arista $e$ que va de $x$ a $y$ tal que $G^* \coloneq (V, E-\set{e})$ es disconexa. El caso $x=y$ queda descartado, pues quitar un bucle no cambia la conexidad de la gráfica ---cualquier camino que conecte dos puntos de la gráfica y que pase por ese bucle, puede simplemente evitar el bucle---, por lo que podemos suponer $x \neq y$. Ahora bien, como quitar $e$ desconectó la gráfica, $x$ y $y$ están en componentes conexas distintas de $G^*$ (si estuvieran en la misma, sería fácil llegar a que $G^*$ es conexo), así que denotemos $C_x$ a la componente de $x$. Es obvio que $C_x$ tiene a todas las aristas de $G^*$ que tienen algún extremo en $C_x$, por lo cual, el grado de $a \en C_x$ (viendo a $C_x$ como subgráfica) será igual a su grado en $G^*$. No obstante, solo los puntos $x$ y $y$ cambiaron su grado al quitar $e$, además $y \notin C_x$. Se sigue que todos los vértices de $C_x$ tienen grado par, a excepción de $x$, cuyo grado será impar (pues disminuyó en uno su grado), en particular, los grados de $C_x$ tienen suma impar. Esto contradice el \emph{teorema de la suma de grados}, que establece que la suma de los grados en un grafo tiene que ser igual al doble de la cantidad de aristas (si lo piensas bien, es obvio) y, por tanto, par. El error estuvo en suponer que $G^*$ es disconexo, por lo que $G$ tiene que ser conexo al quitarle cualquier arista.
+\end{sol}
+
+% Ejercicio 11
+\begin{ejer}
+Sea $G$ un árbol finito y conexo, mostrar que $\card(V)-\card(E)=1$. 
+%(Hint: usar inducción sobre el número de vértices).
+\end{ejer}
+\begin{sol}[Demostración]
+Un árbol se define como un grafo en el que cada par de vértices está conectado por un único camino (simple). En particular, todo árbol es simple, ya que cualquier par de aristas paralelas cuenta como un par de caminos distintos. 
+%Luego, denotaremos $P_{ab}$ al único camino que conecta a $a$ y $b$.
+Hagamos inducción sobre $n = \card(V)$:\par
+Si $n=1$, $G$ no puede tener aristas, luego
+\(
+\card(V) - \card(E) = 1-0 = 1.
+\)
+Supongamos ahora que todo árbol con máximo $n$ vértices satisface la fórmula dada y sea $G$ un árbol con $n+1$ vértices. Consideremos $G^* = (V,E-\set{e})$, donde $e$ es una arista con extremos $x,y \en G$. Veamos que $G^*$ tiene dos componentes conexas, $C_x$ y $C_y$, que son a su vez árboles: en efecto, quitar una arista a una gráfica conexa aumenta la cantidad de componentes conexas máximo a $2$; más aún, solo existía un camino de $x$ a $y$, la arista $e$, así que estos no están conectados en $G^*$. Se sigue que $G^*$ tiene dos componentes conexas, una que tiene a $x$ y otra que tiene a $y$; además, para cualesquiera $a,b \en C_x$ (resp. $a,b \en C_y$), el camino que los conecta es único, pues de haber otro distinto, habría dos caminos de $a$ a $b$ en $G$, lo cual es imposible. Ahora bien, como $C_x$ y $C_y$ son árboles con a lo más $n$ vértices, tenemos ---por hipótesis de inducción--- que $\card(V_x) - \card(E_x) =  1$ y $\card(V_y) - \card(E_y) =  1$; sin embargo, la cantidad de vértices (resp. aristas) de $G^*$ es la suma de la cantidad de vértices (resp. aristas) de $C_x$ y $C_y$; mientras que $G$ es igual a $G^*$ solo con una arista extra. Por lo tanto,
+\[
+\card(V) - \card(E)%
+= \big(\card(V_x) + \card(V_y)\big) - \big(\card(E_x) + \card(E_y) + 1\big)%
+= 1 + 1 - 1 = 1
+\]
+Por inducción, hemos probado la fórmula requerida. 
+\end{sol}
+
+% Ejercicio 12
+\begin{ejer}
+Supongamos que $G$ es finita. Explicar el significado de las potencias de la matriz de adyacencia de $G$.
+\end{ejer}
+\begin{sol}
+Sea $G = (V,E)$ una gráfica finita con $V=\set{v_1,\dots,v_n}$ y cuya matriz de adyacencia denotaremos $A$. Probemos, usando inducción sobre $k$, que $A^k_{i,j}$ es la cantidad de caminos de longitud $k$ que conectan a los vértices $v_i$ y $v_j$.\par
+El caso $k = 1$ es trivial, pues los caminos de longitud $1$ son las aristas. Si suponemos que $A^k_{i,j}$ es la cantidad de caminos de longitud $k$ que conectan a los vértices $v_i$ y $v_j$, entonces por definición
+\[
+    A^{k+1}_{i,j} = \sum^n_{l=1} A^k_{i,l}A_{l,j}
+\]
+como $A^k_{i,l}$ son los caminos de longitud $k$ que van de $v_i$ a $v_l$, y $A_{l,j}$ las aristas con extremos $v_l$ y $v_j$, se sigue que $A^k_{i,l}A_{l,j}$ es la cantidad de caminos con longitud $k+1$ que van de $v_i$ a $v_j$ cuyo penúltimo vértice es $v_l$. Al sumar los $A^k_{i,l}A_{l,j}$ para cada vértice $v_l$, obtenemos que $A^{k+1}_{i,j}$ es la cantidad de caminos de longitud $k+1$ que van de $v_i$ a $v_j$. Por inducción, queda probado lo que se quería.
+\end{sol}\clearpage
+
+%-------------------- Homotopia --------------------
+
+\section{Homotopía}
+
+% Ejercicio 13
+\begin{ejer}
+Demuestre que la equivalencia de homotopía es transitiva.
+\end{ejer}
+\begin{sol}[Demostración]
+Sean tres espacios topológicos $X$, $Y$ y $Z$ y dos equivalencias homotópicas
+{\mathsurround = 0pt
+\[\begin{tikzcd}[column sep = 1.5em]
+	X && Y && Y && Z
+	\arrow["{f_1}", shift left, from=1-1, to=1-3]
+	\arrow["{g_1}", shift left, from=1-3, to=1-1]
+	\arrow["{f_2}", shift left, from=1-5, to=1-7]
+	\arrow["{g_2}", shift left, from=1-7, to=1-5]
+\end{tikzcd}\]
+}
+con homotopías $H_1 \colon g_1f_1 \simeq \id_X$, $K_1 \colon \id_Y \simeq f_1g_1$, $H_2 \colon g_2f_2 \simeq \id_Y$ y $K_2 \colon \id_Z \simeq f_2g_2$. Veamos que la composición horizontal de los diagramas es una equivalencia homotópica, es decir, los morfismos
+\(
+f \coloneq f_2f_1 \colon X \to Z
+\) y \(
+g \coloneq g_1g_2 \colon Z \to X
+\)
+son una equivalencia homotópica.\par
+\vspace{1em}
+\emph{Analizamos la composición $gf$}:
+
+\[
+g f = (g_1 g_2) (f_2 f_1) = g_1 (g_2 f_2) f_1
+\]
+Sabemos, por la hipótesis, que $H_2 \colon g_2 f_2 \simeq \id_Y$. Además, la relación de homotopía es compatible con la composición de funciones (mediante whiskering), por lo tanto, hay una homotopía
+\[
+g_1H_2f_1 \colon g_1 (g_2 f_2) f_1 \simeq g_1 f_1
+\]
+Finalmente, como $H_1\colon g_1 f_1 \simeq \id_X$, tenemos la siguiente homotopía obtenida por composición vertical
+\[
+H_1 \circ g_1H_2f_1 \colon gf \simeq \id_X
+\]
+\vspace{1em}
+\emph{Analizamos la composición $fg$}:
+
+\[
+fg = (f_2f_1) (g_1 g_2) = f_2 (f_1 g_1) g_2
+\]
+Usando la hipótesis, $K_1 \colon \id_Y \simeq f_1g_1$, por lo cual, el whiskering nos da una homotopía
+\[
+f_2K_1g_2 \colon f_2g_2 \simeq f_2(f_1 g_1)g_2
+\]
+Finalmente, la composición vertical de esta homotopía con $K_2 \colon \id_Z \simeq f_2g_2$ nos da la homotopía
+\[
+f_2K_1g_2 \circ K_2 \colon \id_Z \simeq fg
+\]
+Esto prueba que $f$ y $g$ son una equivalencia homotópica entre $X$ y $Z$.
+\end{sol}
+

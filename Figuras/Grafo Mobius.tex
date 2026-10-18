@@ -1,0 +1,40 @@
+\begin{center}
+\begin{tikzpicture}[
+    vertex/.style={circle, fill=black, inner sep = 1.5pt},
+    >=latex,
+]
+\tikzset{
+    mid arrow/.style={
+        decoration={
+            markings,
+            mark=at position 0.5 with {\arrow{>}} 
+        },
+        postaction={decorate} 
+    },
+    curved edge/.style={mid arrow, thick},
+    straight edge/.style={mid arrow, thick},
+    loop edge/.style={mid arrow, thick, min distance=12mm}
+}
+    % Bounding box manual
+    \useasboundingbox (-1.2,-2.1) rectangle (1.2,2.1);
+    % Vértices
+    \node[vertex, label={right:$v_1$}] (v1) at (0, 1.2) {};
+    \node[vertex, label={right:$v_2$}] (v2) at (0, 0) {};
+    \node[vertex, label={right:$v_3$}] (v3) at (0, -1.2) {};
+
+    % Aristas rectas e_1,e_2
+    \draw[straight edge, lime!90!black] (v2) -- node[right, midway, font=\small] {$e_1$} (v1);
+    \draw[straight edge, lime!90!black] (v3) -- node[right, midway, font=\small] {$e_2$} (v2);
+
+    % Bucle e_3
+    \draw[loop edge, violet] (v2) to [out=225, in=135, distance=24mm] 
+        node[left, pos=0.5, font=\small] {$e_3$} (v2);
+
+    % Fronteras e_4 y e_5
+    \draw[curved edge, red] (v1) to [out=145, in=215, distance=48mm] 
+        node[left, midway, font=\small] {$e_4$} (v3);
+    
+    \draw[curved edge, blue] (v1) to [out=35, in=-35, distance=48mm] 
+        node[right, midway, font=\small] {$e_5$} (v3);
+\end{tikzpicture}
+\end{center}

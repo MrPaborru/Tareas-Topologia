@@ -1,0 +1,636 @@
+%----------------------------- Parte B examen ------------------------------
+\section{Solución parte \enquote{B} del examen}
+
+\setcounter{eje}{3}
+\begin{ejer}
+Sea X espacio de Hausdorff. Mostrar que $X \sqcup_f D^n$ es Hausdorff para cualquier $f \colon \partial D^n \to X$.
+\end{ejer}
+\begin{sol}[Demostración]
+\emph{Primero veamos que $X \sqcup \partial D^n$ es Hausdorff}:\\
+Esto se sigue inmediato de que $X$ y $\partial D^n$ lo son, pues si tomamos dos puntos $x,y \en X \sqcup \partial D^n$ distintos, solo hay tres opciones.
+\begin{itemize}
+\item Si $x,y \en X$, entonces existen abiertos $U,V$ en $X$ (y por tanto, abiertos en $X \sqcup \partial D^n$) disjuntos tales que $x \en U$ y $y \en V$.
+
+\item Si $x,y \en \partial D^n$, entonces existen abiertos $U,V$ en $\partial D^n$ (y por tanto, abiertos en $X \sqcup \partial D^n$) disjuntos tales que $x \en U$ y $y \en V$.
+
+\item Si $x \en X$ y $y \en \partial D^n$, entonces $X,\partial D^n$ son abiertos en $X \sqcup \partial D^n$ disjuntos con $x \en X$ y $y \en \partial D^n$.
+\end{itemize}
+En cualquier caso, hemos probado que $X \sqcup \partial D^n$ es Hausdorff.\par\vspace{1em}
+\emph{Ahora veamos que la relación $x \sim f(x)$ es cerrada como subespacio ${\sim} \subseteq (X \sqcup \partial D^n)^2$}:\\
+Esta relación es imagen del mapeo $\partial D^n \to (X \sqcup \partial D^n)^2$ tal que $x \mapsto (x,f(x))$ que es continuo por ser el producto de los mapeos continuos
+\[
+\partial D^n \xrightarrow{\id_{\partial D^n}} \partial D^n \hookrightarrow X \sqcup \partial D^n
+\quad\text{y}\quad
+\partial D^n \xrightarrow{f} X \hookrightarrow X \sqcup \partial D^n
+\]
+Ahora bien, como $\partial D^n$ es compacto, ${\sim} = (\id_{\partial D^n} \times f)(\partial D^n)$ es compacto en $(X \sqcup \partial D^n)^2$; pero este último es $T_2$ por ser producto de espacios $T_2$, se sigue que $\sim$ es cerrado en $(X \sqcup \partial D^n)^2$.\par\vspace{1em}
+\emph{Veamos que la diagonal $\Delta \subseteq (X \sqcup_f D^n)^2$ es cerrada}:\\
+Parecería natural probar ahora que el mapeo cociente $q \colon X \sqcup D^n \to X \sqcup_f D^n$ es abierto para concluir en que $X \sqcup_f D^n$ es $T_2$; sin embargo, esto no es así\footnote{Como contra ejemplo toma $X = \set{*}$: $q(\set{*}) = \set{q(*)}$ no es abierto en el espacio de adjunción (que coincide con $S^{n+1}$), pero $\set{*}$ sí es abierto en $\set{*} \sqcup D^n$.}, por lo que hay que tomar otro camino probando que $q$ es \emph{propio}\footnote{$q$ se dice propio cuando $q \times {\id_Z}$ es cerrado para cualquier espacio $Z$.}. Dado $x \en X \sqcup D^n$, su clase de equivalencia es alguno de los siguientes casos:
+\begin{itemize}
+    \item Si $x \en D^n/\partial D^n$ o $x \en X/f(\partial D^n)$ entonces $x$ solo se identifica consigo misma, i.e., $q(x) = \set{x}$.
+
+    \item Si $x \en \partial D^n$ entonces $x$ se identifica con su imagen bajo $f$ y con cualquier otro elemento con la misma imagen, i.e., $q(x) = \set{f(x)} \cup f^{-1}(\set{f(x)})$.
+
+    \item Si $x \en f(\partial D^n)$, $x$ se identifica con los elementos cuya imagen es $x$, i.e., $q(x) = f^{-1}(\set{x})$.
+\end{itemize}
+En cualquier caso, tenemos que $q(x) = q^{-1}(\set{q(x)})$ es compacto, como $q$ es sobreyectiva, esto implica que $q$ tiene \emph{fibras compactas}\footnote{Esto significa que $q^{-1}(\set{y})$ es compacto para cada $y \en X \sqcup_f D^n$.}. Por otro lado, para cualquier $C \subseteq X \sqcup_f D^n$ su saturación bajo $q$ es $q^{-1}(q(C)) = \bigcup_{c \en C} q(c)$, así que considerando las tres posibilidades antes vistas para $q(c)$,
+\[
+q^{-1}(q(C)) = C \cup f(C \cap \partial D^n) \cup f^{-1}(f(C \cap \partial D^n)) \cup f^{-1}(C \cap X)
+\]
+Como $\partial D^n$ es compacto y $X$ es Hausdorff, $f$ es mapeo cerrado. De esto se sigue que, si $C$ es cerrado, $f(C \cap \partial D^n)$ es cerrado; luego, la continuidad de $f$ garantiza que $f^{-1}(f(C \cap \partial D^n))$ y $f^{-1}(C \cap X)$ son también cerrados, de donde se sigue que $q^{-1}(q(C))$ es cerrado por ser unión finita de cerrados, así que la definición de la topología cociente implica que $q(C)$ es cerrado. Hemos probado que $q$ es mapeo cerrado. Un resultado de topología general (véase el teorema 1 de \S10.2 en \cite{Bourbaki_Top}) garantiza que, como $q$ es continuo, cerrado y de fibras compactas, entonces $q$ es propio. Luego, $q \times {\id}$ y ${\id} \times q$ son cerrados de donde se sigue que $q \times q = (q \times {\id}) \circ ({\id} \times q)$ es cerrado; no obstante, ya vimos que $\sim$ es cerrada y  evidentemente $\Delta = (q \times q)(\sim)$ (con $\Delta$ nos referimos a la diagonal en $(X \sqcup_f D^n)^2$), por lo tanto, $\Delta$ es cerrada, i.e., $X \sqcup_f D^n$ es Hausdorff.
+\end{sol}
+
+\begin{ejer}
+Construir una retracción por deformación explícita de $(S^1 \times S^1)\setminus\set{p}$ a $S^1 \lor S^1$.
+\end{ejer}
+\begin{sol}
+Tomemos a $S^1$ como subespacio de $\mathbb{C}$; luego, $p = (e^{i\pi\theta_0},e^{i\pi\theta_1})$ con $\theta_0,\theta_1 \en [-1,1]$.\par\vspace{1em}
+\emph{Primero demos un retracto por deformación de $I^2\setminus\set{(0,0)}$ a $\partial I^2$}:\\
+En este caso consideramos $I \coloneq [-1,1]$ y también denotaremos $I^2_* \coloneq I^2\setminus\set{(0,0)}$, por lo que $I^2$ es el disco unitario en $\mathbb{R}^2$ con la norma uniforme $\norm{\cdot}_{\infty}$. Esto nos motiva a dar una retracción que mande un punto $(x,y) \en I^2_*$ a su vector unitario; luego, la homotopía de la identidad a esta retracción será dada de modo que, para cada $t\en [0,1]$, mande un punto $(x,y) \en \mathbb{R}^2$ al punto con coordenada afín $t$ en el segmento que va de $(x,y)$ a su unitario $\norm{x,y}_{\infty}^{-1}(x,y)$. Esto es:
+\[
+f_t(x,y) = \big(%
+    1-t + t\norm{x,y}_{\infty}^{-1}
+\big)
+(x,y),%
+\quad\forall t\en[0,1] \forall(x,y)\en\mathbb{R}^2
+\]
+Es evidente que $f_0 = \id$ y para cada $t \en [0,1]$ y $(x,y) \en \partial I^2$ tenemos $\norm{x,y}_{\infty} = 1$ por lo que 
+\[
+f_t(x,y) = (1-t+t)(x,y) = (x,y)%
+\quad\implies\quad%
+f_t|_{\partial I^2} = \id_{\partial I^2}
+\]
+Además, $f_1(x,y) = \norm{x,y}^{-1}_\infty(x,y)$ es unitario, así que $f_1(x,y) \en \partial I^2$ para cada $(x,y) \en I^2_*$. Hemos probado que $f_t$ es retracto por deformación de $I^2_*$ sobre $\partial I^2$.\par\vspace{1em}
+\emph{Veamos que $f_t$ se levanta a un retracto por deformación $\tilde{f}_t \colon I^2_*/{\sim} \to I^2_*/{\sim}$ sobre $\partial I^2/{\sim}$}:\\
+La relación $\sim$ es definida tal que $(-1,y) \sim (1,y)$ y $(x,-1) \sim (x,1)$ con $x,y \en I$. Luego, basta con verificar que la homotopía $\rho f_t \colon I^2_* \to \partial I^2/{\sim}$ obtenida por composición con el mapeo cociente $\rho \colon \partial I^2 \to \partial I^2/{\sim}$ es compatible con $\sim$. En efecto, $\sim$ es trivial en $I^2_* \setminus \partial I^2$, por lo cual $\rho f_t$ es compatible con $\sim$ en dicho conjunto; además, $f_t$ es la identidad restringido a $\partial I^2$ por lo que obviamente cada $\rho f_t$ es compatible con $\sim$ en $\partial I^2$. Esta compatibilidad junto a la propiedad universal del cociente garantiza que existe la homotopía $\tilde{f}_t$ que hace conmutar el siguiente diagrama
+{\mathsurround = 0pt
+\[\begin{tikzcd}%[column sep = 2em, row sep = 1.2em]
+	{I^2_*} && {\partial I^2} \\
+	\\
+	{I^2_*/{\sim}} && {\partial I^2/{\sim}}
+	\arrow["{f_t}", from=1-1, to=1-3]
+	\arrow["\rho"', from=1-1, to=3-1]
+	\arrow["\rho", from=1-3, to=3-3]
+	\arrow["{\tilde{f}_t}"', from=3-1, to=3-3]
+\end{tikzcd}\]
+}
+i.e., $\tilde{f}_t([x,y]) = [f_t(x,y)]$. A partir de esto es inmediato que $\tilde{f}_t$ también es retracto por deformación.\par\vspace{1em}
+\emph{Construyamos un isomorfismo explícito $I^2_* \cong (S^1 \times S^1)\setminus\set{p}$ para conjugar a $\tilde{f}_t$}:\\
+Notemos que la función continua $h \colon I^2_* \to (S^1 \times S^1)\setminus\set{p}$ (recordemos que $p = (e^{i\pi\theta_0}, e^{i\pi\theta_1})$) con
+\[
+h(x,y) = \big(%
+    e^{i\pi(x + \theta_0)} , e^{i\pi(y + \theta_1)}
+\big),%
+\quad\forall(x,y) \en I^2_*
+\]
+está bien definida y es compatible con $\sim$ gracias a que $e^{i\pi(1+\theta_0)} = e^{i\pi(-1+\theta_0)}$ y $e^{i\pi(1+\theta_1)} = e^{i\pi(-1+\theta_1)}$. Por lo tanto, se levanta a un mapeo continuo $\tilde{h} \colon I^2_*/{\sim} \to (S^1 \times S^1)\setminus\set{p}$ con $\tilde{h}[x,y] = h(x,y)$ cuya inversa existe y está dada por
+\[
+\tilde{h}^{-1}(z,w) = \big[%
+\pi^{-1}\Arg_0(z) - \theta_0 \;,\; \pi^{-1}\Arg_1(w) - \theta_1
+\big],%
+\quad\forall(z,w) \en (S^1 \times S^1)\setminus\set{p}
+\]
+donde las funciones argumento están ajustadas a las ramas 
+\[
+\Arg_0 \colon S^1 \to \big[\pi(\theta_0 - 1), \pi(\theta_0 + 1)\big)%
+\quad\text{y}\quad%
+\Arg_1 \colon S^1 \to \big[\pi(\theta_1 - 1), \pi(\theta_1 + 1)\big)%
+\]
+Luego, la conjugación $g_t = \tilde{h}\tilde{f}_t\tilde{h}^{-1}$ es un retracto por deformación de $(S^1 \times S^1)\setminus\set{p}$ sobre el subespacio $\tilde{h}(\partial I^2/{\sim})$, pero notemos que $\tilde{h}$ mapea los puntos de la forma $[\pm1,y]$ o $[x,\pm1]$ sobre
+\[
+\big( \set{e^{i\pi(1+\theta_0)}} \times S^1 \big)%
+\cup%
+\big( S^1 \times \set{e^{i\pi(1+\theta_1)}} \big)%
+= S^1 \lor S^1
+\]
+Para obtener el retracto explícito basta con desarrollar todas las sustituciones:
+\[
+g_t(z,w) = \left(
+e^{i\pi\left((1-t)X + t\frac{X}{M} + \theta_0\right)},
+e^{i\pi\left((1-t)Y + t\frac{Y}{M} + \theta_1\right)}
+\right)
+\]
+donde $X \coloneq \pi^{-1}\Arg_0(z) - \theta_0$, $Y \coloneq \pi^{-1}\Arg_1(w) - \theta_1$ y $M \coloneq \max(|X|, |Y|)$.
+\end{sol}
+
+\begin{ejer}
+Construir un $CW\text{-complejo}$ de dimensión 2 que contenga tanto a $S^1 \times I$ como a la banda de Möbius $B$ como retractos por deformación. 
+\end{ejer}
+\begin{sol}
+\emph{Primero construyamos la banda de Möbius como $CW\text{-complejo}$}:\\
+Esta estructura celular para $B$ constará de tres $0\text{-celdas}$, cinco $1\text{-celdas}$ y dos $2\text{-celdas}$.
+\begin{enumerate}
+\item El $1\text{-esqueleto}$ se construye pegando el inicio de $e_1$ a $v_2$ y el final a $v_1$; pegando el inicio de $e_2$ a $v_3$ y el final a $v_2$; pegando ambos extremos de $e_3$ a $v_2$; y finalmente, pegando el inicio de $e_4$ y $e_5$ a $v_1$, así como su final a $v_3$. Esto produce la siguiente gráfica:\par
+\input{Figuras/Grafo Mobius}
+
+\item Para el $2\text{-esqueleto}$, dividimos la frontera de las $2\text{-celdas}$ $f_1$ y $f_2$ en cuatro segmentos consecutivos. Por ejemplo, si consideramos $f_1 = f_2 = I^2$, entonces el primer segmento es la arista derecha de $\partial I^2$, el segundo es la arista superior, el tercero la izquierda y el cuarto la inferior (notemos que estos segmentos tienen una dirección canónica en sentido anti-horario). Ahora identificaremos estos segmentos con las aristas del grafo anterior del siguiente modo: el primer segmento de $\partial f_1$ se identifica con $e_1$, el segundo con $e_4$, el tercero con $e_2$ y el cuarto con $e_3$; de forma similar, el primer segmento de $\partial f_2$ se identifica con $e_1$, el segundo con $e_5$, el tercero con $e_2$ y el cuarto con $e_3$ pero recorrido en dirección opuesta, i.e., $e_3^{-1}$. 
+\end{enumerate}
+La siguiente figura te ayudará a convencerte de que este $CW\text{-complejo}$ es una banda de Möbius:\par\vspace{1em}
+\input{Figuras/Banda de Mobius}
+\pagebreak[3]
+\emph{Ahora agreguemos a $B$ un cilindro $S^1 \times I$}:\\
+Agregaremos a $B$ dos $0\text{-celdas}$, $v_1'$ y $v_3'$; cuatro $1\text{-celdas}$, $e_1'$, $e_2'$, $e_4'$ y $e_5'$; y dos $2\text{-celdas}$, $f_1'$ y $f_2'$. Las reglas de pegado son las siguientes.
+\begin{itemize}
+\item El inicio de $e_1'$ se pega a $v_2$ y el final a $v_1'$; el inicio de $e_2'$ se pega a $v_3'$ y el final a $v_2$; ambos extremos de $e_4'$ se pegan a $v_1'$ y ambos extremos de $e_5'$ a $v_3'$.
+
+\item La frontera de $f_1'$ se pega siguiendo el camino $(e_1', e_4',e_1'^{-1},e_3)$ y la de $f_2'$ siguiendo el camino $(e_2',e_3,e_2'^{-1},e_5')$.
+\end{itemize}
+Llamemos $M$ al complejo resultante de pegar estas celdas a $B$. Notemos, en la figura de abajo, que estas celdas que pegamos a $B$ forman una estructura celular para $S^1 \times I$, por lo que $M$ se puede ver como el resultado de pegar $B$ y $S^1 \times I$ mediante su "circunferencia central", $e_3 \cup v_2$. Por lo tanto, $B$ y $S^1 \times I$ son subcomplejos de $M$.
+\input{Figuras/Banda con cilindro}
+Más aún hay un retracto por deformación evidente de $S^1 \times I$ sobre $e_3 \cup v_2$ que induce (por propiedad de extensión de la homotopía) un retracto por deformación de $M$ sobre $B$ (pues $e_3 \cup v_2 \subseteq B$). De forma similar, existe un retracto por deformación de $B$ a $e_3 \cup v_2$ el cual induce un retracto por deformación de $M$ a $S^1 \times I$. 
+\end{sol}
+
+%------------------------- Ejercicios Hatcher --------------------------------
+\section{Capítulo 0, \texorpdfstring{\cite{hatcher2002algebraic}}{Hatcher}}
+%------------- Ejercicio 9 ------------
+\setcounter{eje}{8}
+\begin{ejer}
+Demuestra que un retracto de un espacio contráctil es contráctil.
+\end{ejer}
+\begin{sol}[Demostración]
+Si existe una homotopía $\set{f_t \colon X \to X}_{t\en I}$ de $\id_X$ a algún mapeo constante $c_{x_0}$ de valor $x_0 \en X$ y existe $r \colon X \to Y \subseteq X$ con $r^2 = r$, entonces podemos construir la siguiente homotopía:
+\[
+g_t \colon Y \to Y,%
+\quad%
+g_t = r \circ f_t \circ i^X_Y,%
+\quad\forall t\en I
+\]
+donde $i_Y^X$ es la inclusión canónica. Notemos que $g_0 = r \circ i_Y^X = \id_Y$ y $g_1 = r\circ c_{x_0} \circ i_Y^X = c_{r(x_0)}$
+, lo cual demuestra que $Y$ es contráctil.
+\end{sol}
+
+%------------- Ejercicio 14 ------------
+\setcounter{eje}{13}
+\begin{ejer}
+Dados enteros positivos $v$, $e$ y $f$ que satisfacen $v - e + f = 2$, construye una estructura celular sobre $S^2$ con $v$ $0\text{-celdas}$, $e$ $1\text{-celdas}$ y $f$ $2\text{-celdas}$.
+\end{ejer}
+\begin{sol}
+La construcción se realiza de forma inductiva sobre el número de aristas, $e$. Para simplificar el caso base, iniciaré la inducción en $e=0$; esto probará un resultado ligeramente más general que el solicitado.\par
+Si $e=0$, entonces $v=f=1$ así que la estructura $CW$ para $S^2$ es la minimal: una $0\text{-celda}$ $\mathrm{e}^0$ y una $2\text{-celda}$ $\mathrm{e}^2$ pegada mediante el único mapeo posible $\varphi^2 \colon \partial \mathrm{e}^2 \to \mathrm{e}^0$.
+
+Para el paso inductivo, supongamos que $e \en \mathbb{N}_0$ es tal que existe estructura $CW$ para $S^2$ con $v$ $0\text{-celdas}$, $e$ $1\text{-celdas}$ y $f$ $2\text{-celdas}$ para cualesquiera $v,f \en \mathbb{Z}^+$ con $v-e+f = 2$, y sean $v',f' \en \mathbb{Z}^+$ tales que $v' - (e+1) + f' = 2$. En particular se tiene que $v' + f' \geq 3$ por lo que forzosamente $v'\geq 2$ o $f' \geq 2$. Analicemos ambos casos:
+\begin{itemize}
+    \item Si $v' \geq 2$, entonces $(v'-1),f' \en \mathbb{Z}^+$ son tales que $(v'-1) + e + f' = 2$, por lo cual (hipótesis inductiva), existe una estructura $CW$ para $S^2$ con $(v'-1)$ $0\text{-celdas}$, $\mathrm{e}^0_1,\dots,\mathrm{e}^0_{v'-1}$; con $e$ $1\text{-celdas}$, $\mathrm{e}^1_1,\dots,\mathrm{e}^1_e$; y con $f'$ $2\text{-celdas}$, $\mathrm{e}^2_1,\dots,\mathrm{e}^2_{f'}$. A partir de este $CW\text{-complejo}$ construiré uno nuevo añadiendo una $0\text{-celda}$ $\mathrm{e}^0_{v'}$ y una $1\text{-celda}$ $\mathrm{e}^1_{e+1}$. Con este fin, escogemos cualquier $0\text{-celda}$ $\mathrm{e}^0_1 \en X^0$ y una $2\text{-celda}$ $\mathrm{e}^2_k$ de modo que $\mathrm{e}^0_1 \en \im\varphi^2_k$ (i.e., tal que $\mathrm{e}^0_1$ sea identificado en la frontera de $\mathrm{e}^2_k$). Luego, el $0\text{-esqueleto}$ del nuevo complejo será $Y^0 \coloneq \set*{\mathrm{e}^0_1,\dots,\mathrm{e}^0_{v'}}$; el $1\text{-esqueleto}$, $Y^1$, será igual que el del primer $CW$ pero con la adición de $\mathrm{e}^1_{e+1}$ pegada mediante la flecha $\varphi^1_{e+1}$ que asigna el inicio de $\mathrm{e}^1_{e+1}$ a $\mathrm{e}^0_{1}$ y el final a $\mathrm{e}^0_{v'}$; para el $2\text{-esqueleto}$, solo modificaremos la flecha $\varphi^2_k$ del siguiente modo: primero parametrizamos $\partial\mathrm{e}^2_k$ mediante un camino cerrado $c_1 \colon [0,\frac12] \to \partial\mathrm{e}^2_k$ de modo que $\varphi^2_k \circ c_1$ inicia y termina en $\mathrm{e}^0_1$, después, consideramos el camino cerrado $c_2 \colon [\frac12,1] \to Y^1$ que en $[\frac12,\frac34]$ recorre $\mathrm{e}^1_{e+1}$ y en $[\frac34,1]$ recorre $\mathrm{e}^1_{e+1}$ pero en sentido opuesto. El pegado de estas flechas (que está bien definido como mapeo continuo por lema del pegado), $(\varphi^2_k \circ c_1) \cup c_2$, inicia y termina en $\mathrm{e}^0_{v'}$, por lo cual, se factoriza a través de la proyección canónica $p \colon [0, 1] \twoheadrightarrow \partial\mathrm{e}^2_k$ hacia un mapeo continuo $\psi^2_k \colon \partial \mathrm{e}^2_k \to Y^1$ que primero hace el recorrido de $\varphi^2_k$ y luego va y regresa por $\mathrm{e}^1_{v'}$.
+    {\mathsurround = 0pt
+    \[\begin{tikzcd}
+    	{[0,1]} && {Y^1} \\
+    	{\partial\mathrm{e}^2_k}
+    	\arrow["{(\varphi^2_k \circ c_1) \cup c_2}", from=1-1, to=1-3]
+    	\arrow["p"', two heads, from=1-1, to=2-1]
+    	\arrow["{\psi^2_k}"', dashed, from=2-1, to=1-3]
+    \end{tikzcd}\]
+    }
+    Finalmente, el $2\text{-esqueleto}$ $Y^2$ se obtiene reemplazando $\varphi^2_k$ por $\psi^2_k$. 
+    Este nuevo complejo tiene $v'$ $0\text{-celdas}$, $e+1$ $1\text{-celdas}$ y $f'$ $2\text{-celdas}$; más aún, es homeomorfo al primero (es decir, a $S^2$) gracias a que el único cambio que hicimos fue agregar un "pelo" y adecuar un disco de modo que el pelo quede integrado a la esfera y no por fuera de ella.
+
+    \item Si $f' \geq 2$, entonces $v',(f'-1) \en \mathbb{Z}^+$ son tales que $ v' - e + (f'-1) = 2$, por lo cual, la hipótesis inductiva implica que existe una estructura $CW$ para $S^2$ con $v'$ $0\text{-celdas}$, $\mathrm{e}^0_1,\dots,\mathrm{e}^0_{v'}$; con $e$ $1\text{-celdas}$, $\mathrm{e}^1_1,\dots,\mathrm{e}^1_e$; y con $(f'-1)$ $2\text{-celdas}$, $\mathrm{e}^2_1,\dots,\mathrm{e}^2_{f'-1}$. A partir de este $CW\text{-complejo}$ construiré uno nuevo añadiendo una $1\text{-celda}$, $\mathrm{e}^1_{e+1}$, y una $2\text{-celda}$, $\mathrm{e}^2_{f'}$. Haremos algo parecido al punto anterior: escogemos una $0\text{-celda}$ $\mathrm{e}^0_1$, y una $2\text{-celda}$ $\mathrm{e}^2_k$ de tal modo que $\mathrm{e}^0_1 \en \im\varphi^2_k$. Posteriormente, construimos el nuevo complejo cuyo $0\text{-esqueleto}$ es idéntico al primero, $Y^0 = \set{\mathrm{e}^0_1,\dots,\mathrm{e}^0_{v'}}$; cuyo $1\text{-esqueleto}$, $Y^1$, será igual al primero pero con la adición de $\mathrm{e}^1_{e+1}$ pegado mediante el mapeo $\varphi^1_{e+1}$ que asigna ambos extremos de $\mathrm{e}^1_{e+1}$ al vértice $\mathrm{e}^0_1$; y finalmente, el $2\text{-esqueleto}$ será igual al primero, salvo por dos modificaciones: la primera es que cambiaremos a $\varphi^2_k$ (siguiendo un procedimiento análogo al punto anterior) de modo que la mitad de $\partial\mathrm{e}^2_k$ se pegue del mismo modo en que lo hacía $\varphi^2_k$ y la otra mitad se pegue siguiendo el bucle $\mathrm{e}^1_{e+1}$. La segunda modificación es que pegaremos la $2\text{-celda}$ $\mathrm{e}^2_{f'}$ de modo que toda su frontera se identifique con el bucle $\mathrm{e}^1_{e+1}$. Esto dará un nuevo $CW\text{-complejo}$ con $v'$ $0\text{-celdas}$, $e+1$ $1\text{-celdas}$ y $f'$ $2\text{-celdas}$, el cual es homeomorfo al primero (es decir, a $S^2$) ya que el único cambio que hicimos fue crear un "hueco" con el bucle $\mathrm{e}^1_{e+1}$ para después "rellenarlo" mediante $\mathrm{e}^2_{f'}$.
+\end{itemize}
+En cualquier caso, demostramos que si el ejercicio se cumple para $e \en \mathbb{N}_0$ entonces también para $e+1$. Por lo cual, queda demostrado por inducción lo que se quería.
+\end{sol}
+
+%------------- Ejercicio 15 ------------
+\setcounter{eje}{14}
+\begin{ejer}
+Enumera todos los subcomplejos de $S^{\infty}$, considerando la estructura celular de $S^{\infty}$ en la cual $S^n$ es el $n\text{-esqueleto}$.
+\end{ejer}
+\begin{sol}
+Dicha estructura considera cada $n\text{-esqueleto}$ obtenido al pegar dos $n\text{-celdas}$, llámese $\mathrm{e}^n_{1}$ y $\mathrm{e}^n_2$, pegadas mediante la identificación $\varphi^n_k \colon \partial \mathrm{e}^n_k \xrightarrow{\cong} S^{n-1}$, donde $S^{n-1}$ será el $(n-1)\text{-esqueleto}$ de $S^\infty$ definido por la misma regla. Como un mapeo continuo manda puntos de adherencia en puntos de adherencia y $\partial\mathrm{e}^n_k \subseteq \ubar{\mathrm{e}^n_k}$, tenemos que 
+\[
+S^{n-1} = \phi^n_k(\partial\mathrm{e}^n_k) \subseteq \ubar{\phi^n_k(\mathrm{e}^n_k)}
+\]
+donde $\phi^n_k \colon D^n_k \to S^\infty$ es el mapeo característico. Esto implica que cualquier subcomplejo de $S^\infty$ que incluya una $n\text{-celda}$ $\mathrm{e}^n_k$, contendrá también al esqueleto anterior $S^{n-1}$ (en particular, a todas las $m\text{-celdas}$ de $S^\infty$ con $m<n$), ya que un subcomplejo se define cerrado. Esto hace que solo haya tres opciones para subcomplejos de $S^\infty$:
+\begin{itemize}
+\item El subcomplejo trivial $\varnothing \subseteq S^\infty$.
+\item Para cada $n \en \mathbb{N}$ hay tres subcomplejos de $S^\infty$ de dimensión $n$, determinados por las tres posibles elecciones no vacías de $n\text{-celdas}$: $\mathrm{e}^n_1 \cup S^{n-1}$, $\mathrm{e}^n_2 \cup S^{n-1}$ y $S^n$. Nótese que $\mathrm{e}^n_k \cup S^{n-1} \cong D^n$.
+\item De dimensión infinita el único subcomplejo es el mismo $S^\infty$: en efecto, sea $K$ subcomplejo de $S^\infty$ con dimensión infinita y $n \en \mathbb{N}$ arbitrario. Como $K$ tiene dimensión infinita, existe $k \en \set{1,2}$ tal que $\mathrm{e}^{n+1}_k$ está incluido en $K$; sin embargo, ya vimos que esto implica que $S^n \subseteq K$ y, por tanto, $\mathrm{e}^n_1$ y $\mathrm{e}^n_2$ están incluidos en $K$. Como $n \en \mathbb{N}$ es arbitrario, se sigue que $K = S^\infty$.
+\end{itemize}
+\end{sol}
+
+%------------- Ejercicio 18 ------------
+\setcounter{eje}{17}
+\begin{ejer}
+Demuestra que $S^1 * S^1 = S^3$ y, más generalmente, que $S^m * S^n = S^{m+n+1}$.
+\end{ejer}
+\begin{sol}[Demostración]
+\emph{Daré directamente la prueba del caso general}:\\
+Si $(x,y,t) \en S^m \times S^n \times I \subseteq \mathbb{R}^{m+1} \times \mathbb{R}^{n+1} \times I$ entonces $(\sqrt{1-t} \cdot x,\sqrt{t} \cdot y) \en \mathbb{R}^{m+n+2}$ tiene norma
+\[
+\norm\Big{\sqrt{1-t} \cdot x\,,\,\sqrt{t} \cdot y} = \sqrt{\vphantom{T^p}(1-t)\norm{x}^{\smash2} + t\norm{y}^{\smash2}} = \sqrt{(1-t)+t} = 1
+\]
+Por lo cual, la asignación $(x,y,t) \mapsto (\sqrt{1-t} \cdot x,\sqrt{t} \cdot y)$ define una función (evidentemente continua)
+\[
+H \colon S^m \times S^n \times I \to S^{m+n+1}
+\]
+Analicemos las fibras de $H$: si $z = (z_1,\dots,z_{m+n+2}) \en S^{m+n+1}$ entonces podemos definir
+\[
+u \coloneq (z_1,\dots,z_{m+1}) \en \mathbb{R}^{m+1}%
+\quad\text{y}\quad%
+v \coloneq (z_{m+2},\dots,z_{m+n+2}) \en \mathbb{R}^{n+1}
+\]
+los cuales satisfacen $1 = \norm{z} = \norm{u,v} = \sqrt{\vphantom{T^T}\norm{u}^{\smash2} + \norm{v}^{\smash2}}$, de donde 
+\[
+\norm{u} = \sqrt{\vphantom{T^p}1-\norm{v}^{\smash2}}%
+\quad\text{y}\quad%
+\norm{v} = \sqrt{\vphantom{T^p}1-\norm{u}^{\smash2}}%
+\] 
+Luego, hay tres posibilidades para $H^{-1}(\set{z})$: 
+\begin{itemize}
+    \item Si $u$ y $v$ son no nulos, entonces $(\hat{u},\hat{v},\norm{v}^2) \en S^m \times S^n \times I$ (con $\hat{u} \coloneq \norm{u}^{-1}u$, $\hat{v} \coloneq \norm{v}^{-1}v$) y 
+    \[
+    H(\hat{u},\hat{v},\norm{v}^2)%
+    = \big(%
+        \sqrt{\vphantom{T^p} 1-\norm{v}^{\smash2}}\cdot\hat{u}, \sqrt{\vphantom{T^p} \norm{v}^{\smash2}}\cdot\hat{v}%
+    \big)%
+    = (u,v) = z
+    \]
+    Recíprocamente, si $(x,y,t) \en S^m \times S^n \times I$ es tal que $H(x,y,t) = z$ entonces $\sqrt{1-t} \cdot x = u$ y $\sqrt{t} \cdot y = v$, como $x$ y $y$ son unitarios se sigue que $x = \hat{u}$, $y = \hat{v}$ y $\sqrt{t} = \norm{v}$, i.e., $(x,y,t) = (\hat{u},\hat{v},\norm{v}^2)$. Esto prueba que
+    \[
+    H^{-1}(\set{z}) = \set*{(\hat{u},\hat{v},\norm{v}^2)}
+    \]
+
+    \item Si $v = 0$ entonces forzosamente $u \neq 0$ (ya que $z \neq 0$); más aún $\norm{u} = \sqrt{1-0^2} = 1$, por lo tanto, $u = \hat{u}$ y para cada $y \en S^n$ se cumple
+    \[
+    H(u, y, 0)%
+    = \big(\sqrt{1-0} \cdot u,\sqrt{0} \cdot y\big)%
+    = (u,0) = z
+    \]
+    Recíprocamente, si $(x,y,t) \en S^m \times S^n \times I$ es tal que $H(x,y,t) = z$ entonces $\sqrt{1-t} \cdot x = u$, como $x$ y $u$ son unitarios se sigue que $\sqrt{1-t} = 1$, así que $t=0$ y $x = u$. Esto prueba que
+    \[
+    H^{-1}(\set{z}) = \set*{(u,y,0) \given y \en S^n}
+    \]
+
+    \item Si $u = 0$ entonces forzosamente $v \neq 0$ (ya que $z \neq 0$); más aún $\norm{v} = \sqrt{1-0^2} = 1$, por lo tanto, $v = \hat{v}$ y para cada $x \en S^m$ se cumple
+    \[
+    H(x, v, 1)%
+    = \big(\sqrt{1-1} \cdot x,\sqrt{1} \cdot v\big)%
+    = (0,v) = z
+    \]
+    Recíprocamente, si $(x,y,t) \en S^m \times S^n \times I$ es tal que $H(x,y,t) = z$ entonces $\sqrt{t} \cdot y = v$, como $y$ y $v$ son unitarios se sigue que $\sqrt{t} = 1$, así que $t=1$ y $y = v$. Esto prueba que
+    \[
+    H^{-1}(\set{z}) = \set*{(x,v,1) \given x \en S^m}
+    \]
+\end{itemize}
+Hemos demostrado que las fibras de $H$ son no vacías y coinciden exactamente con las clases de equivalencia de la relación $\sim$ respecto a la cual $S^m * S^n = (S^m \times S^n \times I)/\sim$. Por lo tanto, $H$ induce una biyección continua $\tilde{H} \colon S^m * S^n \to S^{m+n+1}$ tal que el siguiente diagrama conmuta
+{\mathsurround = 0pt
+\[\begin{tikzcd}[column sep = 1.6em]
+	{S^m \times S^n \times I} && {S^{m+n+1}} \\
+	{S^m * S^n}
+	\arrow["H", from=1-1, to=1-3]
+	\arrow["\rho"', two heads, from=1-1, to=2-1]
+	\arrow["{\tilde{H}}"', dashed, from=2-1, to=1-3]
+\end{tikzcd}\]
+}
+Veamos que esta biyección continua $\tilde{H}$ es homeomorfismo: como $S^m,S^n,I$ son compactos entonces también lo es $S^m \times S^n \times I$, pero la proyección canónica $\rho\colon S^m \times S^n \times I \twoheadrightarrow S^m * S^n$ es sobre, por lo que $S^m * S^n$ es también compacto; por otro lado, sabemos que $S^{m+n+1}$ es Hausdorff. Por un resultado conocido de topología general, de esto se sigue que $\tilde{H}$ es mapeo cerrado; pero toda biyección continua y cerrada es un homeomorfismo. Esto prueba que $\tilde{H} \colon S^m * S^n \cong S^{m+n+1}$.
+\end{sol}
+
+%------------- Ejercicio 19 ------------
+\setcounter{eje}{18}
+\begin{ejer}
+Demuestra que el espacio obtenido de $S^2$ al adjuntarle $n$ $2\text{-celdas}$ a lo largo de cualquier colección de $n$ círculos en $S^2$ es homotópicamente equivalente a la suma wedge de $n+1$ $2\text{-esferas}$.
+\end{ejer}
+\begin{sol}[Demostración]
+Sea $X_0 = S^2$ y construimos $X_n$ adjuntando $n$ $2\text{-celdas}$ $D^2$ a $X_0$ a lo largo de $n$ círculos $\gamma_1, \gamma_2, \dots, \gamma_n \colon S^1 \hookrightarrow S^2$ en $S^2$ (por definición cada $\gamma_i$ es embebimiento), es decir (recordando que $S^1 = \partial D^2$), 
+\[
+X_n = X_0 \sqcup_{\gamma_1} D^2 \sqcup_{\gamma_2} D^2 \sqcup_{\gamma_3} \dots \sqcup_{\gamma_n} D^2
+\]
+
+Afirmamos que $X_n \simeq \bigvee_{i=1}^{n+1} S^2$. Para probar esto, procedemos por inducción en $n$:
+
+\begin{itemize}
+\item \emph{Caso base ($n = 0$):} \\
+El resultado se cumple trivialmente: $X_0 = S^2=\bigvee^1_{i=1} S^2$.
+
+\item \emph{Paso inductivo:} \\
+Supongamos que para $k < n$, $X_k \simeq \bigvee_{i=1}^{k+1} S^2$, y consideramos 
+\[
+X_{k+1} = X_k \sqcup_{\gamma_{k+1}} D^2
+\] 
+
+Dado que $S^2$ es simplemente conexo, cada $\gamma_i$ en $S^2$ es nulhomotópico.%
+\footnote{
+Se puede probar esto último sin recurrir al grupo fundamental: como $\gamma_i$ es embebimiento, su imagen no puede ser $S^2$ (en caso contrario, se cumpliría $S^1 \cong S^2$; pero al quitar dos puntos $S^1$ pierde conexidad, mientras que $S^2$ no). Luego, tomando $p \en S^2\setminus\im(\gamma_i)$, podemos ver a $\gamma_i$ como un lazo en $S^2\setminus\set{p} \cong D^2$, siendo que en este último $\gamma_i$ se puede contraer a un punto por convexidad.
+}
+En particular, $\gamma_{k+1}$ es nulhomotópico en $S^2$, y por lo tanto en $X_k$. Así, $\gamma_{k+1} \simeq c_x$ donde $c_x: S^1 \to X_k$ es constante de valor $x\en X_k$.
+
+Un resultado de la clase (\cite[p. 13]{hatcher2002algebraic}) garantiza, gracias a que $(D^2,S^1)$ es un par CW, que la homotopía $\gamma_{k+1} \simeq c_x$ induce otra homotopía en los espacios de adjunción
+\[
+X_{k+1} = X_k \sqcup_{\gamma_{k+1}} D^2 \simeq X_k \sqcup_{c_x} D^2
+\]
+
+Ahora, $X_k \sqcup_{c_x} D^2$ es el espacio cociente de $X_k \sqcup D^2$ identificando todo $\partial D^2$ con el punto $x$. Esto es exactamente la suma wedge $X_k \vee (D^2 / \partial D^2)$. Dado que $D^2 / \partial D^2 \cong S^2$, se sigue que
+\[
+X_k \sqcup_{c_x} D^2 \cong X_k \vee S^2
+\]
+Hemos probado que $X_{k+1} \simeq X_k \vee S^2$; sin embargo, por hipótesis inductiva, $X_k \simeq \bigvee_{i=1}^{k+1} S^2$, así que
+\[
+X_{k+1} \simeq X_k \vee S^2 \simeq \left( \bigvee_{i=1}^{k+1} S^2 \right) \vee S^2 = \bigvee_{i=1}^{k+2} S^2
+\]
+lo que completa el paso inductivo. Concluimos que $X_n \simeq \bigvee_{i=1}^{n+1} S^2$ para todo $n \en \mathbb{N}$. \qedhere
+\end{itemize}
+\end{sol}
+
+%------------- Ejercicio 21 ------------
+\setcounter{eje}{20}
+\begin{ejer}
+Sea $X$ un espacio de Hausdorff conexo que es la unión de un número finito de $2\text{-esferas}$, cualesquiera dos de las cuales se intersectan en a lo más un punto. Demuestra que $X$ es homotópicamente equivalente a una suma wedge de $S^1\text{’s}$ y $S^2\text{’s}$.
+\end{ejer}
+\begin{sol}[Demostración]
+Sea $X = \bigcup_{i=1}^n S_i$ donde cada $S_i$ es una $2\text{-esfera}$ y $\abs{S_i \cap S_j} \leq 1$ para $i\neq j$.\vspace{1em}
+
+\emph{Veamos que $X$ tiene estructura CW}:\\
+Para cada esfera $S_i$, sea $P_i \coloneqq \bigcup_{j \neq i} (S_i \cap S_j)$, es decir, $P_i$ es el conjunto de puntos de $S_i$ que pertenecen alguna otra esfera, también denotemos $P = \bigcup_iP_i$, i.e., $P$ consta de cada punto que pertenece al menos a dos esferas distintas. Como $\abs{P_i} - (\abs{P_i}-1) + 1 = 2$, el \myref{ejer:2.14} garantiza que existe una estructura CW para $S_i$ que consta de:
+\begin{itemize}[leftmargin=1.2em]
+    \item $0\text{-celdas}$: exactamente los puntos de $P_i$
+    \item $1\text{-celdas}$: $\abs{P_i} - 1$ aristas que conectan todos los puntos de $P_i$.%
+    \item $2\text{-celdas}$: una única $2\text{-celda}$ cuya adherencia es $S_i$
+\end{itemize}
+Como el $1\text{-esqueleto}$ $S^{(1)}_i$ es conexo y su cantidad de aristas es su cantidad de vértices menos uno, se sigue (por un resultado elemental de grafos) que $S^{(1)}_i$ es un árbol.%
+\footnote{
+    Sin usar dicho teorema, se puede ver que $S^{(1)}_i$ es un árbol a partir de su construcción inductiva dada en el \myref{ejer:2.14}. En efecto, ya que la cantidad de caras es menor a 2, el complejo se construye partiendo de la estructura minimal de $S_i$ con un único vértice $p\en P_i$ y después (ya que tenemos $f=1 < 2$) se agregan, sucesivamente, "pelos" (aristas con un vértice nuevo) hasta conectar todos los puntos de $P_i$.
+}
+
+Ahora bien, sea $U = \coprod_{i=1}^n S_i$ el CW obtenido sumando las estructuras CW anteriores. Definimos $X'$ como el espacio cociente de $U$ obtenido identificando aquellas $0\text{-celdas}$ que representan el mismo punto en $X$.%
+\footnote{
+    Como $X'$ es obtenido identificando conjuntos de $0\text{-celdas}$ (es decir, subcomplejos de $U$ con dimensión cero), se tiene que $X'$ tiene una estructura CW heredada de $U$ (\cite[p. 8]{hatcher2002algebraic}).
+}
+Es elemental probar que el CW-complejo $X'$ es homeomorfo a $X$: la función $\iota: U \to X$ inducida sumando las inclusiones $S_i \hookrightarrow X$ es continua y sobre; además, por definición sus fibras coinciden exactamente con las clases de equivalencia en $X'$. Se sigue (prop. universal) que $\iota$ se factoriza mediante el cociente a una biyección continua $\tilde{\iota} \colon X' \to X$. No obstante, $X$ es Hausdorff por hipótesis y $X'$ es compacto por ser imagen continua de $U$ (siendo $U$ unión finita de esferas compactas), así que $\tilde{\iota}$ es homeomorfismo. Luego, demos a $X$ la estructura CW de $X'$.\vspace{1em}
+
+
+\emph{Construyamos un grafo $G$ que genera las copias de $S^1$ al contraer un árbol generador $T$}:\\
+Consideremos el grafo $G \coloneqq \bigcup_{i=1}^n S^{(1)}_i \subseteq X^{(1)}$. Afirmamos que $G$ es conexo: si $x, y \en G$, como $X$ es conexo, existe una sucesión finita de esferas $S_{i_1}, \dots, S_{i_k}$ con $x \en S_{i_1}$, $y \en S_{i_k}$ y $S_{i_j} \cap S_{i_{j+1}} \neq \emptyset$.%
+\footnote{
+    De no ser así, podríamos encontrar dos esferas ---llámense $S_j$ y $S_k$--- que no son conectadas por tal sucesión. Luego, si $\mathcal{F}$ es la colección de esferas que sí son conectadas con $S_j$ por una sucesión de este estilo, tenemos que $\bigcup\mathcal{F}$ y $X\setminus\bigcup\mathcal{F}$ son unión finita y no vacía de esferas (ya que $S_j \subseteq \bigcup\mathcal{F}$ y $S_k \subseteq X\setminus\bigcup\mathcal{F}$). Más aún, se sigue que $\bigcup\mathcal{F}$ y $X\setminus\bigcup\mathcal{F}$ son compactos y, ya que $X$ es Hausdorff, cerrados. Esto contradice la conexidad de $X$.
+}
+Cada intersección no vacía está contenida en $G$, y cada $S^{(1)}_{i_j}$ es conexo, luego podemos conectar $x$ e $y$ mediante estos árboles.
+
+Gracias a que $G$ es un grafo conexo y finito, existe un árbol generador $T$ para $G$. Notemos el hecho evidente de que $T$ es subcomplejo de $X$, ya que es subgrafo de $X^{(1)}$.\vspace{1em}
+
+\emph{Veamos que $X \simeq X/T$ y $X/T$ es homotópico a un wedge de $S^2$'s y $S^1$'s}:\\
+Como $T$ es un árbol finito, es contráctil, por lo que el par CW $(X,T)$ satisface que la proyección canónica $X \to X/T$ es una equivalencia homotópica. Por otro lado, al cocientar $X/T$:
+\begin{enumerate}[label = (\roman*), leftmargin=1.2em]
+\item La imagen de $T$ colapsa a un punto $x_0$.
+
+\item Para cada $S_i$ con $S^{(1)}_i \subseteq T$, tenemos $S_i/T \cong S_i/S^{(1)}_i$; es decir, se colapsa todo el $1\text{-esqueleto}$ de $S_i$ al punto $x_0$, por lo que el CW $S_i/T$ consta solamente de una $0\text{-celda}$ $x_0$ y una $2\text{-celda}$ (la misma que $S_i$) pegada mediante el único mapeo hacia $\set{x_0}$. Se sigue que $S_i/T \cong S_i$.
+
+\item Para cada esfera $S_i$ tal que $S^{(1)}_i \nsubseteq T$, sean $e_1,\dots,e_r$ las aristas de $S^{(1)}_i$ que no están en $T$. Luego, $S_i/T \cong S_i/(S^{(1)}_i-\set{e_k}_k)$; como $S^{(1)}_i$ es un árbol, $S^{(1)}_i-\set{e_k}_k$ tiene $r$ componentes conexas $C_1,\dots,C_r$ que serán a su vez árboles (todo subgrafo conexo de un árbol es un árbol). Luego, $S_i/T \cong S_i/(\dot\cup_kC_k)$; es decir, cada componente $C_k$ colapsara al punto $x_0$, mientras que las aristas $e_k$ se convertirán en bucles de $x_0$; es decir, $S_i/T$ será homeomorfo a la esfera $S_i$ con los $r$ puntos correspondientes a las componentes conexas identificados. De forma similar al ejemplo 0.11 de \cite[p. 13]{hatcher2002algebraic}, una esfera con $r$ puntos identificados es homotópicamente equivalente al wedge de una esfera con $r$ círculos. Es decir, $S_i/T \simeq S_i \vee \bigvee^r_{k=1}S^1$
+\end{enumerate}
+
+
+De los puntos (i), (ii) y (iii) se sigue que $X/T \simeq \bigvee_{i=1}^n S^2 \vee \bigvee_{j=1}^m S^1$, donde $m$ es la cantidad de aristas en $G$ que no están en $T$. Por transitividad y simetría, concluimos que:
+\[
+X \simeq \bigvee_{i=1}^n S^2 \vee \bigvee_{k=1}^m S^1
+\]
+como se quería demostrar.\vspace{1em}
+
+\emph{Observación sobre el número $m$}:\\
+Como $T$ es un árbol con $\abs{P}$ vértices (pues es generador de $G$ y los vértices de $G$ son los puntos de $P$), debe tener $\abs{P}-1$ aristas. Luego, $m = a - \abs{P} + 1$ donde $a$ es la cantidad de aristas en $G$;\footnote{Este es conocido como el número ciclomático de $G$. Coincide con la cantidad de generadores para el primer grupo de homología de $G$.} sin embargo, la cantidad de aristas de $G$ es la suma de las aristas en cada árbol $S^{(1)}_i$; siendo que cada uno de estos últimos fue construido con $\abs{P_i}-1$ aristas. Luego,
+\[
+m = \sum^n_{i=1}(\abs{P_i}-1) - \abs{P} + 1%
+= \sum^n_{i=1}\abs{P_i} - n - \abs{P} + 1%
+\]
+Ahora, si para cada punto $p \en P$ denotamos por $n_p$ el número de esferas que contienen a $p$, entonces $\sum^n_{i=1}\abs{P_i} = \sum_{p \en P} n_p$ ya que, en la primer suma, cada punto $p \en P$ se cuenta tantas veces como $P_i's$ a los que pertenece. Por lo tanto:
+\[
+m = \sum_{p \en P} n_p - \abs{P} - n + 1 = \sum_{p \en P} (n_p - 1) - n + 1 = \sum_{p \en P} (n_p - 1) - (n-1)
+\]
+{
+% Supongamos que $X = \bigcup^n_{i=1} S_i$ donde cada $S_i$ es una $2\text{-esfera}$, de modo que $S_i \cap S_j$ tiene a lo sumo un punto, para cada $i,j \en \set{1,\dots,n}$ distintos.\vspace{1em}
+
+% \emph{Veamos que $X$ tiene estructura CW}:\\
+% Para cada esfera $S_i$ definimos $P_i \coloneq \bigcup_{k\neq i}S_i \cap S_k$, es decir, $P_i$ consta de los puntos de $S_i$ que también pertenecen a alguna otra esfera. Luego, damos a cada $S_i$ una estructura CW de modo que sus $0\text{-celdas}$ sean los puntos de $P_i$ (cf. \myref{ejer:14}). Finalmente, denotaremos $U \coloneq \coprod^n_{i=1}S_i$ al CW-complejo que es suma de estos últimos; y $X$ será isomorfo al cociente (que denotaremos $X'$) resultado de identificar aquellas $0\text{-celdas}$ que provienen del mismo punto en $X$. El resultado será un CW ya que estamos cocientando sobre subcomplejos de $U$ conformados por $0\text{-celdas}$.%
+% \footnote{%
+%     Es elemental construir el homeomorfismo: sumamos los encajes $S_i \hookrightarrow X$ en una función continua $\iota \colon U \to X$. Como las fibras de $\iota$ son exactamente las clases en $X'$, esta se factoriza mediante el cociente a una biyección continua $\tilde{\iota} \colon X' \to X$. No obstante, $X$ es Hausdorff por hipótesis y $X'$ es compacto por ser imagen continua de $U$ (siendo $U$ unión finita de esferas compactas), así que $\tilde{\iota}$ es homeomorfismo.
+% }\vspace{1em}
+
+% \emph{Construyamos un CW que es homotópico tanto a $X$ como a un wedge de $S^1\text{’s}$ y $S^2\text{’s}$}:\\
+% Definamos un grafo simple $G_X$ que llamaremos \emph{grafo de adyacencia de $X$}, de tal manera que  sus vértices son las esferas $S_i$, y hay una arista entre $S_i$ y $S_j$ si y solo si $S_i \cap S_j \neq \varnothing$. En particular, la conexidad de $X$ garantiza que $G_X$ es un grafo conexo.%
+% \footnote{%
+%     Notemos que, si $X$ fuera wedge de esferas, podría obtenerse inductivamente pegando una esfera por un punto a la vez; luego, $G_X$ podría obtenerse inductivamente agregando un vértice unido por una arista a la vez, i.e., sería un árbol. Se seguirá, como corolario de este ejercicio, que basta con que $G_X$ sea un árbol para que $X$ sea wedge de esferas.
+% }
+% Ahora bien, la conexidad de $G_X$ garantiza que existe un árbol generador $T$ para $G_X$,%
+% \footnote{%
+%     Un árbol generador para $G_X$ es un subgrafo que es un árbol y que abarca todos los vértices de $G_X$. Luego, a partir de él es posible obtener a $G_X$ agregando posiblemente algunas aristas.
+% }  %
+% por lo que se puede definir un CW-complejo $Y$ cuyo grafo de adyacencia es exactamente el árbol generador $T\subseteq G_X$: partimos de $U=\coprod_i S_i$ e identificamos solamente las $0\text{-celdas}$ que provienen de intersecciones correspondientes a aristas de $T$.
+
+% Sea ahora $\mathcal{M}$ el conjunto de aristas de $G_X$ que \emph{no} pertenecen a $T$. Cada $\alpha\en\mathcal{M}$ corresponde a un punto $p\en S_i\cap S_j\subseteq X$ cuyas dos copias en $Y$ no fueron identificadas. Para cada tal $\alpha$, añadimos a $Y$ una $1\text{-celda}$ $e^1_\alpha$ que une esas dos $0\text{-celdas}$, y definimos
+% \[
+% W \;=\; Y \,\cup\, \bigcup_{\alpha\en\mathcal{M}} e^1_\alpha
+% \]
+% Esto sigue siendo un CW que contiene a $Y$ como subcomplejo.
+
+% \begin{enumerate}[leftmargin=1.2em]
+% \item\emph{$W$ es homotópico a $X$}:\\
+% Sea $A=\bigcup_\alpha e_\alpha\subseteq W$. Notemos que que $W/A\cong X$, ya que si definimos $\pi:W\to X$ enviando cada $S_i\subseteq Y$ por la inclusión $S_i\hookrightarrow X$ y enviando cada punto de $e_\alpha$ al punto común $p$ correspondiente en $X$, se cumple que las fibras de $\pi$ coinciden exactamente con las clases en $W/A$. Por lo tanto, $\pi$ se factoriza mediante $W/A$ a una biyección continua $\tilde{\pi} \colon W/A \to X$ que será homeomorfismo gracias a la compacidad de $W/A$ y a la condición Hausdorff de $X$. 
+
+% Ahora bien, como $A$ es subcomplejo contráctil de $W$, la proyección $W\to W/A$ es una equivalencia homotópica. Por lo tanto $W\simeq W/A \cong X$.
+
+% \item\emph{$W$ es homotópico a un wedge de $S^1$’s y $S^2$’s:}\\
+% Consideremos ahora el $0\text{-esqueleto}$ $W^{(0)}\subseteq W$ (que coincide con el de $Y$). Al colapsar $W^{(0)}$:
+
+% \begin{itemize}[leftmargin=1.2em]
+%     \item Cada $S_i\subseteq Y$ se convierte en una copia de $S^2$ pegada por un solo punto.
+%     \item Cada segmento $e_\alpha$ se convierte en un bucle, dando una copia de $S^1$.
+% \end{itemize}
+
+% En consecuencia, el cociente $W/W^{(0)}$ es:
+% \[
+% W/W^{(0)} \;\cong\; \bigvee_{i=1}^n S^2 \;\vee\; \bigvee_{\alpha\en\mathcal{M}} S^1
+% \]
+
+% Como $W^{(0)}$ es un subcomplejo contráctil (pues es suma de puntos), la proyección $W\to W/W^{(0)}$ es una equivalencia de homotopía. Así, $W \simeq W/W^{(0)}$, de donde
+% \[
+% W \;\simeq\; \bigvee_{i=1}^n S^2 \vee \bigvee_{\alpha\en\mathcal{M}} S^1 
+% \]
+% \end{enumerate}
+% Combinando (1) y (2) por transitividad y simetría, concluimos que $X\simeq \bigvee_{i=1}^n S^2 \vee \bigvee_{\alpha\en\mathcal{M}} S^1$, como se quería. Más aún, por definición, $\mathcal{M}$ tiene tantos puntos como aristas hay en $G_X$ que no están en $T$; sin embargo, $T$ es un árbol, así que la cantidad de aristas en $T$ es igual a $n-1$, mientras que hay tantas aristas en $G_X$ como parejas distintas de esferas en $X$ con intersección no nula. Luego, la cantidad de copias de $S^1$ será $m-n+1$ donde $m$ es la cantidad de parejas distintas de esferas en $X$ que tienen intersección no nula.\footnote{El número $m-n+1$ es conocido como el número ciclomático de $G_X$, es la cantidad de generadores para la homología de $G_X$.}
+}
+\end{sol}
+
+%------------- Ejercicio 22 ------------
+\setcounter{eje}{21}
+\begin{ejer}
+Sea $X$ un grafo finito contenido en un semiplano $P \subseteq \mathbb{R}^3$ y que intersecta el borde de $P$ en un subconjunto de los vértices de $X$. Describe el tipo de homotopía de la “superficie de revolución” obtenida al rotar $X$ alrededor de la recta borde de $P$.
+\end{ejer}
+\begin{sol}
+Supongamos, sin perder generalidad, que $X$ es conexo (en otro caso, basta con trabajar cada componente conexa de $X$ y luego tomar unión disjunta al final), aunque notemos que no necesariamente es simple. Denotaremos $R(X)$ al resultado de revolucionar el grafo $X$. Consideraremos dos conceptos elementales de la teoría de grafos cuya prueba queda fuera del objetivo del curso:
+\begin{itemize}[leftmargin=1.2em]
+\item Todo grafo finito (no necesariamente simple) tiene un bosque generador con la misma cantidad de componentes conexas. En particular, si es conexo, admite un árbol generador (ya usamos esto último para grafos simples en el \myref{ejer:2.21}).
+
+\item El \emph{número ciclomático} de un grafo es $m = a - n + c$ donde $a$ es la cantidad de aristas, $n$ la cantidad de vértices y $c$ es la cantidad de componentes conexas. El hecho relevante es que $m$ es invariante homotópico (solo depende de los coeficientes de Betti). Sin embargo, solo necesitamos usar que se mantiene invariante al contraer sub-árboles, lo cuál es inmediato de probar: si $T \subseteq X$ es sub-árbol con $t$ vértices, entonces (por ser árbol) tiene $t-1$ aristas; luego, el cociente $X/T$ tiene $a-t + 1$ aristas (las $t-1$ aristas en $T$ se anulan) y $n-t+1$ vértices (los $t$ vértices de $T$ se convierten en uno). Como $X/T$ tiene las mismas componentes conexas que $X$, se sigue que el número ciclomático de $X/T$ es $(a-t + 1)-(n-t+1)+c=a-n+c$. En particular, se sigue que $m$ también se mantiene invariante al contraer sub-bosques (basta con contraer sucesivamente cada componente conexa del bosque, cada una de las cuales será un sub-árbol).
+\end{itemize}
+
+\emph{Analicemos el subgrafo maximal de $X$ que queda fuera de $\partial P$}:\\
+Denotaremos $Y$ al subgrafo maximal de $X$ contenido en $P\setminus\partial P$; es decir, cuyos vértices $Y^{(0)}$ son los puntos de $X^{(0)}\setminus\partial P$ y cuyas aristas son las de $X$ entre puntos de $Y^{(0)}$. Aunque no sabemos si $Y$ es conexo, al menos sabemos que contiene un bosque generador $T \subseteq Y$, de modo que si las componentes conexas de $Y$ son $Y_1,\dots,Y_c$, entonces las de $T$ son $T_1,\dots,T_c$ y cada $T_k$ es árbol generador de $Y_k$. De esto se sigue que 
+\[
+Y/T = Y_1/T \sqcup \dots \sqcup Y_c/T \cong Y_1/T_1 \sqcup \dots \sqcup Y_c/T_c
+\]
+Donde cada $Y_k/T_k$ es homeomorfo a un wedge de tantos círculos como aristas tiene $Y_k$ que no están en $T$ ya que, como ya mencionamos arriba, $Y_k/T_k$ tiene $\abs*{Y_k^{(0)}}-\abs*{T_k^{(0)}}+1$ vértices y $a_k-\abs*{T_k^{(0)}}+1$ aristas, donde $a_k$ es el número de aristas de $Y_k$; como $T_k$ es generador, $\abs*{T_k^{(0)}}=\abs*{Y_k^{(0)}}$, así que $Y_k/T_k$ tiene un solo vértice y $a_k-\abs*{Y_k^{(0)}}+1$ aristas.
+Luego, gracias a que cada $T_k$ es contráctil (por ser árbol), la proyección $Y_k \to Y_k/T_k \cong Y_k/T$ es una equivalencia homotópica, por lo que su suma, la proyección $Y \to Y/T$, también es equivalencia homotópica.%
+\footnote{
+    La inversa homotópica de $Y \to Y/T$ será simplemente la suma de las inversas homotópicas de cada $Y_k \to Y_k/T$.
+} %
+En resumen,
+\[
+Y \simeq \bigvee^{r_1}_{i=1}S^1 \sqcup \cdots \sqcup \bigvee^{r_c}_{i=1}S^1,%
+\quad\text{donde}\quad%
+r_k \coloneq a_k - \abs*{Y_k^{(0)}} + 1
+\]
+Ahora bien, como $Y \subseteq P\setminus\partial P$, entonces el resultado de revolucionar $Y$ ---es decir, $R(Y)$--- es homeomorfo a $Y \times S^1$. Como los productos preservan la homotopía,%
+\footnote{
+    Si $f_t \colon A \to B$ y $f'_t \colon A' \to B'$ son homotopías, entonces $f_t \times f'_t \colon A \times A' \to B \times B'$ es una homotopía. De esto se sigue que si $h \colon M \to N$ y $h'\colon M \to N$ son equivalencias homotópicas, entonces $h \times h' \colon M \times M' \to N \times N'$ también, ya que la inversa homotópica de $h \times h'$ es el producto de las inversas homotópicas de $h$ y $h'$.
+}
+se tiene 
+\[
+Y \times S^1%
+\simeq \Big(\bigvee^{r_1}_{i=1}S^1 \sqcup \cdots \sqcup \bigvee^{r_c}_{i=1}S^1\Big)\times S^1%
+= \Big(\bigvee^{r_1}_{i=1}S^1\Big) \times S^1 \sqcup \cdots \sqcup \Big(\bigvee^{r_c}_{i=1}S^1\Big) \times S^1
+\]
+Pero es sencillo notar que cada $\Big(\bigvee^{r_k}_{i=1}S^1\Big) \times S^1$ es una adjunción de $r_k$ toros pegados por una circunferencia común, i.e., $\set{x_0} \times S^1$ donde $x_0$ es el punto común del wedge $\bigvee^{r_k}_{i=1}S^1$. Denotaremos a esta adjunción de toros como $\bigsqcup^{r_k}_{S^1} \mathbb{T}^2$, lo que sirve como compresión de $\mathbb{T}^2 \sqcup_{S^1}\dots\sqcup_{S^1}\mathbb{T}^2$. Así,
+\[
+R(Y) \cong Y \times S^1 \simeq {\bigsqcup^{r_1}}_{S^1} \mathbb{T}^2 \sqcup \dots \sqcup {\bigsqcup^{r_c}}_{S^1} \mathbb{T}^2
+\]
+Ahora hay dos posibilidades:
+\begin{enumerate}[leftmargin=*]
+\item Si $Y = X$, es decir, si $X$ no tiene puntos en $\partial P$, entonces $Y$ es conexo, por lo que $c=1$ y $r_1 = a - n+1$ lo cual coincide con $m$. Es decir,
+\[
+R(X) \simeq {\bigsqcup^{m}}_{S^1} \mathbb{T}^2
+\]
+
+\item Si $Y \neq X$, como $X$ es conexo, para cada componente $Y_k$ tiene que existir un vértice $p_k \en X^{(0)}$ de modo que hay una arista $e_k$ de $p_k$ hasta algún vértice de $Y_k$. Ahora bien, por un lado, se tiene que $X \simeq X/T$ naturalmente, ya que $T$ es sub-bosque de $X$. Además, como $Y$ se encuentra fuera de $\partial P$, también los árboles $T_k$, así que cocientar $X$ sobre $T$ no debería afectar el tipo de homotopía de $R(X)$, es decir, $R(X) \simeq R(X/T)$. Notemos que $X/T$ se ve como $Y/T$ (unión de sumas wedge de $S^1$'s) conectando cada único vértice de las componentes $Y_k/T$ hacia los vértices de la frontera mediante las aristas que no fueron consideradas en $Y$. Es decir, $e$ es una arista fuera de $Y$ que conecta un vértice $p\en \partial P$ con algún vértice de $Y_k$ si y solo si en $X/T$ $e$ es un vértice que conecta el punto $p$ con el único vértice del wedge $Y_k/T$. Esto nos dice que $X/T$ se ve como las uniones disjuntas de sumas wedge $Y/T \cong \bigvee^{r_1}_{i=1}S^1 \sqcup \cdots \sqcup \bigvee^{r_c}_{i=1}S^1$ conectados a vértices en $\partial P$.\par
+
+No obstante, las aristas $e_k$ que conectan $p_k$ con $Y_k/T \cong \bigvee^{r_k}_{i=1}S^1$ en $R(X/T)$ se ven como $2\text{-discos}$ (ya que son segmentos que tocan el eje de giro $\partial P$), por lo cual podemos contraerlas sin afectar el tipo de homotopía de $R(X/T)$. Contraer dichas aristas crea un nuevo grafo $X'$ que tiene todos sus vértices en $\partial P$ y tiene el mismo tipo de homotopía (y mismo número ciclomático) que $X/T$ y $X$, y como ya vimos, cumple $R(X') = R(X/T) = R(X)$. Esto nos deja a un paso de terminar, pues basta con analizar $R(X')$: es sencillo ver que, como cada arista en $X/T$ tiene ambos extremos en $\partial P$, al revolucionar siempre generará, o bien una esfera (en caso de tener ambos extremos distintos), o bien una esfera con dos puntos identificados (en caso de tener dos extremos en un mismo vértice). Analicemos ambos casos:
+    \begin{enumerate}[leftmargin=1.2em, label=(\roman*)]
+    \item Como ya mencionamos, un bucle genera en $R(X')$ un esfera con dos puntos identificados, este tipo de esferas son homotópicas a un wedge $S^2 \vee S^1$ como ya se vio en el ejemplo 0.8 de \cite[p. 11]{hatcher2002algebraic}. Por lo tanto, en $R(X')$ hay, por cada vértice con bucles $p \en \partial P$, un wedge $\bigvee^r_{i=1} (S^2 \vee S^1)$ donde $r$ es la cantidad de bucles.
+    
+    \item Aunque cada arista con extremos distintos genera solo una esfera, estas esferas estarán pegadas entre sí por vértices comunes. Notemos que estas esferas pegadas también se reducen a sumas wedge de esferas y circunferencias: si $e$ es una arista con extremos $p,q\en \partial P$, solo hay una forma de que $e$ genere un $S^1$ a $R(X')$: cuando existe otro camino en $X'$ distinto de $e$ que conecta a $p$ con $q$.%
+    \footnote{
+        De no ser así, solo tendríamos que $e$ forma parte de una sucesión de esferas cada una pegada con la anterior por un punto sin cerrar el ciclo, lo que se reduce a una suma wedge de $S^2$'s, lo que no aporta ningún $S^1$.
+    } %
+    Esto nos muestra que aquello que aporta copias de $S^1$ son en realidad los \emph{ciclos}. En efecto, si hay un ciclo (sin bucles) $(e_1,\dots,e_l)$ en $X'$, este generará en $R(X')$ una sucesión de esferas de modo que cada par de ellas se intersecta en un punto exactamente (por ejemplo, las esferas generadas por $e_1$ y $e_2$ se intersectan en el vértice común de $e_1$ y $e_2$). Por el \myref{ejer:2.21} se sigue que $(e_1,\dots,e_l)$ genera una suma wedge $\bigvee_{i=1}^l S^2 \vee \bigvee_{k=1}^{m_l} S^1$ donde se tiene $m_l= 1$ ya que el grafo subyacente de estas esferas $G$ es el ciclo $(e_1,\dots,e_l)$ que tiene número ciclomático igual a $1$. En conclusión, cada ciclo independiente genera un wedge con tantas esferas como aristas tiene y con un solo $S^1$.
+    \end{enumerate}
+Notemos que ambos incisos (i) y (ii) dicen en esencia lo mismo: cada ciclo independiente aporta una copia de $S^1$ y tantas esferas como aristas tiene; en particular, (i) es el caso cuando el ciclo independiente es un bucle, y contamos de una sola vez todos los bucles del vértice. Como ya tenemos un número que cuenta los ciclos independientes ---es decir, el número ciclomático $m$--- y vimos que este es igual para los grafos $X$, $Y$ y $X'$, concluimos que:
+\[
+R(X) \simeq R(X') \simeq \bigvee^{a'}_{i=1} S^2 \vee \bigvee^m_{i=1}S^1
+\]
+donde $a'$ es la cantidad de aristas de $X'$. Haciendo memoria de cómo obtuvimos $X'$, podríamos deducir una fórmula también para $a'$. En cualquier caso, hemos probado que $R(X)$ tiene el tipo de homotopía de un wedge de esferas y circunferencias cuando tiene algún vértice en el eje $\partial P$.
+\end{enumerate}
+\end{sol}
+
+%------------- Ejercicio 24 ------------
+\setcounter{eje}{23}
+\begin{ejer}
+Sean $X$ y $Y$ complejos CW con $0\text{-celdas}$ $x_0$ y $y_0$. Demuestra que los espacios cociente
+\[
+X * Y / (X * \{y_0\} \cup \{x_0\} * Y)
+\quad \text{y} \quad
+S(X \wedge Y) / S(\{x_0\} \wedge \{y_0\})
+\]
+son homeomorfos, y deduce que $X * Y \simeq S(X \wedge Y)$.
+\end{ejer}
+\begin{sol}[Demostración]
+Denotemos por $\sim_1$ a la relación de equivalencia en $X*Y$, por $\sim_2$ la de $X \wedge Y$, por $\sim_3$ a la de $S(X \wedge Y)$, por $\sim_4$ a la del cociente sobre $X * \{y_0\} \cup \{x_0\} * Y$ y, finalmente, por $\sim_5$ a la del cociente sobre $S(\{x_0\} \wedge \{y_0\})$. Las clases de equivalencia módulo $\sim_i$ con representante $x$ se denotarán $[x]_i$. Además, si se concatenan dos clases del siguiente modo: \enquote{$[[x]_i]_j$}, escribiremos simplemente $[x]_{i,j}$. Ahora bien, comenzamos definiendo una función 
+\[
+h_1 \colon X * Y \to S(X \wedge Y),%
+\quad\text{tal que}\quad%
+[x,y,t]_1 \mapsto [[x,y]_2,t]_3%
+\quad\forall (x,y,t)\en X \times Y \times I
+\]
+Veamos que esta función está bien definida: si $(x,y,t) \sim_1 (x',y',t')$ entonces, o bien ambos representantes son iguales (en cuyo caso ya terminamos), o se cumple alguna de dos opciones:
+\begin{itemize}[leftmargin=1.2em]
+\item $x=x'$ y $t=t'=0$: en este caso, da igual que $[x,y]_2 \neq [x',y']_2$, pues todo $(X \wedge Y) \times \set0$ es colapsado a un punto por $\sim_3$, así que $[[x,y]_2,t]_3 = [[x,y]_2,0]_3 = [[x',y']_2,0]_3 = [[x',y']_2,t']_3$.
+\item $y = y'$ y $t=t'=1$: análogamente al punto anterior, $(X \wedge Y) \times \set1$ es colapsado a un punto por $\sim_3$, así que $[[x,y]_2,t]_3 = [[x,y]_2,1]_3 = [[x',y']_2,1]_3 = [[x',y']_2,t']_3$.
+\end{itemize}
+En cualquier caso, $h_1[x,y,t] = h_1[x',y',t']$, así que $h_1$ está bien definida. Más aún, la propiedad universal del cociente garantiza que la continuidad de $h_1$ equivale a la de $(x,y,t) \mapsto [[x,y]_2,t]_3$, siendo esta última continua por ser composición de la proyección canónica $r \mapsto [r]_3$ con el producto de las funciones continuas $(x,y,t) \mapsto (x,y) \mapsto [x,y]_2$ y $(x,y,t) \mapsto t$. 
+
+Ahora sea $A := X * \{y_0\} \cup \{x_0\} * Y \subseteq X*Y$. 
+Observemos que si $[x,y,t]_1 \en A$ entonces, necesariamente, $y=y_0$ o $x=x_0$. En ambos casos
+$[x,y]_2 = [x_0,y_0]_2$, pues $\sim_2$ colapsa $X \times \{y_0\}$ y $\{x_0\} \times Y$ al punto base de 
+$X\wedge Y$. De este modo,
+\[
+h_1([x,y,t]_1)
+    = [[x,y]_2,t]_3
+    = [[x_0,y_0]_2,t]_3
+    \en S(\{x_0\}\wedge\{y_0\}) 
+\]
+lo que muestra que $h_1(A)\subseteq S(\{x_0\}\wedge\{y_0\})$. Por la propiedad universal del cociente, $h_1$
+induce de manera única una aplicación continua
+\[
+h_2 \colon 
+\frac{X*Y}{A}
+\longrightarrow
+\frac{S(X\wedge Y)}{S(\{x_0\}\wedge\{y_0\})},
+\qquad
+[x,y,t]_{1,4}\longmapsto [[x,y]_2,t]_{3,5}
+\]
+
+\vspace{1em}\emph{Construyamos la inversa de $h_2$}:\\
+Definimos ahora la función 
+\[
+g_1\colon (X\wedge Y)\times I \longrightarrow \frac{X*Y}{A} ,
+\qquad
+([x,y]_2,t)\longmapsto [x,y,t]_{1,4} 
+\]
+Esta aplicación está bien definida: si $(x,y)\sim_2(x',y')$ entonces, o bien ambas parejas son iguales, o bien
+$(x,y),(x',y') \en X\times\{y_0\} \cup \{x_0\}\times Y$. Entonces, por un lado, se tiene $x = x_0$ o $y=y_0$, en cualquier caso $[x,y,t]_1 \en A$; y por otro lado, $x'=x_0$ o $y'=y_0$, de donde $[x',y',t]_1 \en A$; es decir, $[x,y,t]_{1,4} = [x',y',t]_{1,4}$ y $g_1$ está bien definida.
+
+Además, $g_1$ es constante tanto en $(X \wedge Y) \times\set{0}$ como en $(X \wedge Y) \times\set{1}$ (es decir, está bien definida módulo $\sim_3$):
+\begin{itemize}[leftmargin=1.2em]
+\item Sean $([x,y]_2,0),([x',y']_2,0) \en (X \wedge Y) \times\set{0}$: por un lado, se cumple $[x,y,0]_1 = [x,y_0,0]_1$ y $[x',y',0]_1 = [x',y_0,0]_1$; por otro lado, $[x,y_0,0]_1,[x',y_0,0]_1 \,\en\, X * \set{y_0} \,\subseteq\, A$. Es decir, se tiene $[x,y,0]_{1,4} = [x',y',0]_{1,4}$, así que $g([x,y]_2,0) = g([x',y']_2,0)$.
+
+\item Análogamente, sean $([x,y]_2,1),([x',y']_2,1) \en (X \wedge Y) \times\set{1}$: por un lado, se cumple $[x,y,1]_1 = [x_0,y,1]_1$ y $[x',y',1]_1 = [x_0,y',1]_1$; por otro lado, $[x_0,y,1]_1,[x_0,y',0]_1 \,\en\, \set{x_0} * Y \,\subseteq\, A$. Es decir, se tiene $[x,y,1]_{1,4} = [x',y',1]_{1,4}$, así que $g([x,y]_2,1) = g([x',y']_2,1)$.
+\end{itemize}
+De este hecho se sigue (prop. universal) que $g_1$ induce un único
+\[
+g_2\colon S(X\wedge Y) \longrightarrow \frac{X*Y}{A} ,
+\qquad
+[[x,y]_2,t]_3\longmapsto [x,y,t]_{1,4}
+\]
+Veamos que $g_2$ es constante en $S(\{x_0\}\wedge\{y_0\})$:
+si $[[x,y]_2,t]_3,[[x',y']_2,t']_3 \en S(\{x_0\}\wedge\{y_0\})$ entonces $[x,y]_2=[x',y']_2 = [x_0,y_0]_2$
+de donde se sigue (evaluando en $g_2$) $[x,y,t]_{1,4} = [x_0,y_0,t]_{1,4}$ y $[x',y',t']_{1,4} = [x_0,y_0,t']_{1,4}$; sin embargo, $[x_0,y_0,t]_1, [x_0,y_0,t']_1 \en A$, por lo que $[x_0,y_0,t]_{1,4} = [x_0,y_0,t']_{1,4}$. Esto implica que $[x,y,t]_{1,4} = [x',y',t']_{1,4}$, i.e., $g_2([[x,y]_2,t]_3) = g_2([[x',y']_2,t']_3)$. Aplicando nuevamente la prop. universal, $g_2$ induce un único
+\[
+g_3
+\colon 
+\frac{S(X\wedge Y)}{S(\{x_0\}\wedge\{y_0\})}
+\longrightarrow
+\frac{X*Y}{A},
+\qquad
+[[x,y]_2,t]_{3,5}\longmapsto [x,y,t]_{1,4}.
+\]
+
+\vspace{1em}\emph{Verifiquemos que $h_2$ y $g_3$ son inversas:}\\
+Sea $[x,y,t]_{1,4}\en (X*Y)/A$. Entonces
+\[
+(g_3\circ h_2)([x,y,t]_{1,4})
+    = g_3([[x,y]_2,t]_{3,5})
+    = [x,y,t]_{1,4},
+\]
+lo cual es inmediato por las definiciones. Recíprocamente, para $[[x,y]_2,t]_{3,5}$ tenemos
+\[
+(h_2\circ g_3)([[x,y]_2,t]_{3,5})
+    = h_2([x,y,t]_{1,4})
+    = [[x,y]_2,t]_{3,5}.
+\]
+Por tanto $h_2$ y $g_3$ son inversas continuas entre sí, y así
+\[
+\frac{X*Y}{A}
+\cong
+\frac{S(X\wedge Y)}{S(\{x_0\}\wedge\{y_0\})},
+\]
+
+\vspace{1em}\emph{Finalmente, veamos que $X * Y \simeq S(X \wedge Y)$}:\\
+El subespacio $A=X*\{y_0\}\cup\{x_0\}*Y$ es contráctil, pues es la unión de los conos 
+$CX$ y $CY$ pegados por su vértice común $[x_0,y_0,t]_1$. Asimismo,
+$S(\{x_0\}\wedge\{y_0\})$ es la suspensión del punto base de $X\wedge Y$, luego es un intervalo, 
+por tanto contráctil. De esto se sigue que las proyecciones canónicas
+\[
+X*Y \longrightarrow (X*Y)/A,
+\qquad
+S(X\wedge Y) \longrightarrow S(X\wedge Y)\big/\,S(\{x_0\}\wedge\{y_0\})
+\]
+son equivalencias de homotopía al colapsar subespacios contráctiles. 
+Componiendo estas equivalencias con el homeomorfismo $h_2$ se obtiene una equivalencia de homotopía
+\(
+X*Y \;\simeq\; S(X\wedge Y)
+\)
+\end{sol}

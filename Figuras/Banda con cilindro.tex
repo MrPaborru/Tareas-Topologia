@@ -1,0 +1,142 @@
+\begin{center}
+\begin{tikzpicture}[scale=1.1,>=latex]
+%-------------------------------------- Defino estilo de flecha -----------------------------------
+\tikzset{
+    mid arrow/.style={
+        decoration={
+            markings,
+            mark=at position 0.5 with {\arrow{>}} 
+        },
+        postaction={decorate} 
+    },
+    init arrow/.style={
+        decoration={
+            markings,
+            mark=at position 0.2 with {\arrow{>}} 
+        },
+        postaction={decorate} 
+    }
+}
+
+\begin{axis}[
+    hide axis, clip=false,
+    view={90}{45}
+]
+
+%------------------------------------- Cilindro -------------------------------------
+\addplot3 [
+    surf, shader=faceted interp,
+    point meta=x,
+    colormap={graywhite}{color=(gray!70!white) color=(white)}, % Gradiente suave
+    samples=40,
+    samples y=5,
+    z buffer=sort,
+    domain=0:360,
+    y domain=-0.5:0.5
+] (
+    {cos(x)},
+    {sin(x)},
+    {0.5*y}
+);
+
+%------------------------------------- Circunferencia central e_3 ----------------------------------------
+\addplot3 [
+    samples=50,
+    domain=85:-85,
+    samples y=0,
+    thick,
+    violet,
+    mid arrow
+] (
+    {cos(x)},
+    {sin(x)},
+    {0}
+) node[pos=0.5, below] {$e_3$}; % <- El nombre se añade aquí
+\addplot3 [
+    samples=50,
+    domain=-115:-245,
+    samples y=0,
+    thick,
+    violet,
+] (
+    {cos(x)},
+    {sin(x)},
+    {0}
+);
+
+%------------------------------- Corte transversal vertical superior e_1' ------------------------------------
+\addplot3 [
+    samples=50,
+    domain=0:0.5,
+    samples y=0,
+    thick,
+    yellow,
+    mid arrow,
+] (
+    {(1+0.5*x*cos(180/2)))*cos(180)}, % x: sustituye phi = 180
+    {(1+0.5*x*cos(180/2)))*sin(180)}, % y: sustituye phi = 180
+    {0.5*x*sin(180/2)}                % z: sustituye phi = 180
+)node[pos=0.5, left] {$e_1'$}; % <- El nombre se añade aquí
+
+%------------------------------- Corte transversal vertical inferior e_2' ------------------------------------
+\addplot3 [
+    samples=50,
+    domain=-0.5:0,
+    samples y=0,
+    thick,
+    yellow,
+    mid arrow,
+] (
+    {(1+0.5*x*cos(180/2)))*cos(180)}, % x: sustituye phi = 180
+    {(1+0.5*x*cos(180/2)))*sin(180)}, % y: sustituye phi = 180
+    {0.5*x*sin(180/2)}                % z: sustituye phi = 180
+)node[pos=0.5, left] {$e_2'$}; % <- El nombre se añade aquí
+
+%------------------------------------- Circunferencia central e_5' ----------------------------------------
+\addplot3 [
+    samples=50,
+    domain=-85:85,
+    samples y=0,
+    thick,
+    cyan,
+    mid arrow
+] (
+    {cos(x)},
+    {sin(x)},
+    {-0.25}
+) node[pos=0.5, below] {$e_5'$}; % <- El nombre se añade aquí
+\addplot3 [
+    samples=50,
+    domain=-147:-213,
+    samples y=0,
+    thick,
+    cyan,
+] (
+    {cos(x)},
+    {sin(x)},
+    {-0.25}
+);
+
+%------------------------------------- Circunferencia superior e_4' ----------------------------------------
+\addplot3 [
+    samples=50,
+    domain=-180:180,
+    samples y=0,
+    thick,
+    red!70!yellow,
+    mid arrow,
+] (
+    {cos(x)},
+    {sin(x)},
+    {0.25}
+)node[pos=0.5, below] {$e_4'$}; % <- El nombre se añade aquí
+
+%---------------------------------------------- Vértices ----------------------------------------------
+% Vértices en phi = 180°
+\node[right, yshift=7pt] at (axis cs:-1,0,-0.25) {$v_3'$};
+\node[right, yshift=7pt] at (axis cs:-1,0,0) {$v_2$};
+\node[right, yshift=7pt] at (axis cs:-1,0,0.25) {$v_1'$};
+\addplot3[only marks, mark=*, mark size=1.5pt, black] coordinates {(-1,0,-0.25) (-1,0,0) (-1,0,0.25)};
+\end{axis}
+\end{tikzpicture}
+\end{center}
